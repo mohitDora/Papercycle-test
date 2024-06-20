@@ -4,7 +4,6 @@ import React from "react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { StoreProvider, useStoreContext } from "../../../lib/Context/store";
 import theme from "../../../lib/Theme/theme";
-import "../../app/globals.css"
 import Sonner from "./Sonner";
 import { StyledEngineProvider } from "@mui/material";
 
@@ -27,11 +26,12 @@ const LayoutContent = ({ children }) => {
 const Layout = ({ children }) => {
     return (
         <StoreProvider>
+            <StyledEngineProvider injectFirst>
             <ThemeProvider theme={theme}>
-                {/* <CssBaseline></CssBaseline> */}
+                <CssBaseline></CssBaseline>
                 <LayoutContent>{children}</LayoutContent>
             </ThemeProvider>
-            {/* </StyledEngineProvider> */}
+            </StyledEngineProvider>
         </StoreProvider>
     );
 };
