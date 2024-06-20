@@ -127,10 +127,10 @@ export default function DrawerAppBar(props) {
 
   return (
     <div className="flex mb-20">
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <HideOnScroll {...props}>
      
-        <AppBar component="nav" classes={"py-2 bg-neutral-100"} elevation={0}>
+        <AppBar component="nav" classeName="py-2 bg-neutral-100" elevation={0}>
           
 
           
