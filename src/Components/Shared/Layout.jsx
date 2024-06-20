@@ -6,7 +6,6 @@ import { StoreProvider, useStoreContext } from "../../../lib/Context/store";
 import theme from "../../../lib/Theme/theme";
 import Sonner from "./Sonner";
 import { StyledEngineProvider } from "@mui/material";
-import "../../app/globals.css"
 
 const LayoutContent = ({ children }) => {
   const { snackbarOpen, handleSnackbarClose, sonner } = useStoreContext();
