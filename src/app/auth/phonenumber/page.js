@@ -1,6 +1,6 @@
 "use client"
 import { Button, Input, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useStoreContext } from "@/Context/store";
 import { CONTACT_DETAILS, MESSAGE } from "../../../../utils/Constant";
 import Image from "next/image";
