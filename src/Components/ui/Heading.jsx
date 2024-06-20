@@ -9,7 +9,7 @@ function Heading({ title }) {
 
   return (
     <>
-    <Box className='text-4xl font-extrabold tracking-tight lg:text-5xl py-12'>
+    <Box className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl py-12'>
       {words.map((word, index) => (
         <span
           key={index}

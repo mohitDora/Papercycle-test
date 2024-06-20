@@ -8,7 +8,7 @@ import Card2 from "@/Components/ui/Card2";
 function How() {
   return (
     <>
-      <Heading title="How papercycle.in Works"></Heading>
+      <Heading title="How papercycle.in Works"/>
       <div className="flex flex-col md:grid grid-cols-3 w-[100%] gap-4">
         {COMPONENTS_DATA1?.map((item, index) => {
           return (
