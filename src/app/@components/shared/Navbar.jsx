@@ -107,7 +107,7 @@ export default function DrawerAppBar(props) {
           {PROFILE_ITEMS.map((item,index) => {
             return (
               <Navlink key={index} href={item.link} className="hover:bg-gray-100 p-2">
-                <Button className="block text-black p-4" onClick={item.text==="Logout"?Logout:""}>{item.text}</Button>
+                <Button className="block text-black p-4" onClick={item.text==="Logout"?()=>Logout():""}>{item.text}</Button>
               </Navlink>
             );
           })}
