@@ -45,7 +45,7 @@ function PhoneNumber() {
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-12">
-      <div className="hidden md:flex flex-col lg:w-2/3 gap-4 ">
+      <div className="hidden lg:flex flex-col lg:w-2/3 gap-4 ">
       <Image src={text} ></Image>
       <Image src={Login} ></Image>
       </div>

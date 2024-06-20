@@ -20,16 +20,10 @@ function RegisterPage() {
   const registerUserFunc = async () => {
     try {
       await registerUser(formData.name, formData.email);
-      setSonner({
-        severity: "success",
-        message: "Registration Successfull",
-      });
+
       handleSnackbarOpen();
     } catch (error) {
-      setSonner({
-        severity: "error",
-        message: "Registration Failed",
-      });
+
       handleSnackbarOpen();
       console.log(error);
     }
