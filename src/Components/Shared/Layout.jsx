@@ -27,12 +27,12 @@ const LayoutContent = ({ children }) => {
 const Layout = ({ children }) => {
   return (
     <StoreProvider>
-      {/* <StyledEngineProvider injectFirst> */}
+      <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
           {/* <CssBaseline></CssBaseline> */}
           <LayoutContent>{children}</LayoutContent>
         </ThemeProvider>
-      {/* </StyledEngineProvider> */}
+      </StyledEngineProvider>
     </StoreProvider>
   );
 };
