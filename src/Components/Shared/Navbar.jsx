@@ -18,12 +18,12 @@ import {
   CssBaseline,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { NAV_ITEMS, PROFILE_ITEMS } from "../../utils/Constant";
-import { useStoreContext } from "../../lib/Context/store";
+import { NAV_ITEMS, PROFILE_ITEMS } from "../../../utils/Constant";
+import { useStoreContext } from "../../../lib/Context/store";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "../../lib/assets/logo ppcy.svg";
-import Navlink from "./Shared/Navlink";
+import Logo from "../../../lib/assets/logo ppcy.svg";
+import Navlink from "./Navlink";
 
 const drawerWidth = 240;
 
