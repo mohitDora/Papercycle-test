@@ -1,6 +1,4 @@
-
 module.exports = {
-  mode:'jit',
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -13,12 +11,12 @@ module.exports = {
         secondary: "#62AB45",
         tertiary: "#ABD960",
         grey: "#F1F1F1",
-        darkGrey:'#858585'
+        darkGrey: "#858585",
       },
 
       fontFamily: {
-        poppins: ['Poppins'],
-        montserrat: ['Montserrat'],
+        poppins: ["Poppins"],
+        montserrat: ["Montserrat"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -28,4 +26,7 @@ module.exports = {
     },
   },
   plugins: [],
+  corePlugins: {
+    preflight: false,
+  },
 };
