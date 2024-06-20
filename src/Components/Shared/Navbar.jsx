@@ -126,11 +126,11 @@ export default function DrawerAppBar(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <div className="flex mb-20">
+    <div className="flex mb-20 important">
       {/* <CssBaseline /> */}
       <HideOnScroll {...props}>
      
-        <AppBar component="nav" classeName="py-2 bg-neutral-100" elevation={0}>
+        <AppBar component="nav" className="py-2 bg-neutral-100" elevation={0}>
           
 
           
