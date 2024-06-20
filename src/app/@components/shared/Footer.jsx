@@ -81,7 +81,7 @@ function Footer() {
                 PROFILE_ITEMS?.map((item, index) => {
                   return (
                     <Typography key={index}>
-                      <Link href={item.link} onClick={item.text==="Logout"?Logout:""}>{item.text}</Link>
+                      <Link href={item.link} onClick={item.text==="Logout"?()=>Logout():""}>{item.text}</Link>
                     </Typography>
                   );
                 })}

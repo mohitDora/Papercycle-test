@@ -199,7 +199,7 @@ export default function DrawerAppBar(props) {
                     onClose={handleCloseUserMenu}
                   >
                     {PROFILE_ITEMS.map((item, index) => (
-                      <Link href={item.link} key={index}>
+                      <Link href={item.link} key={index} onClick={item.text==="Logout"?()=>Logout():""}>
                         <MenuItem onClick={handleCloseUserMenu}>
                           <Typography textAlign="center">
                             {item.text}
