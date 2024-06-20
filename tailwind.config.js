@@ -29,7 +29,7 @@ module.exports = {
     },
   },
   plugins: [],
-  // important:"__next",
+  important:true,
   // corePlugins: {
   //   preflight: false,
   // },
