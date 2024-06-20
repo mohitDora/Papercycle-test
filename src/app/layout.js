@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google";
-import Navbar from "./Navbar";
+import Navbar from "@/app/@components/shared/Navbar";
 import Footer from "@/app/@components/shared/Footer";
 import Layout from "@/app/@components/shared/Layout";
 import Head from "next/head";

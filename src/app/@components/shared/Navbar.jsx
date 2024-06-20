@@ -18,12 +18,12 @@ import {
   CssBaseline,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { NAV_ITEMS, PROFILE_ITEMS } from "../../utils/Constant";
+import { NAV_ITEMS, PROFILE_ITEMS } from "@/Constant";
 import { useStoreContext } from "@/Context/store";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "@/assets/logo ppcy.svg";
-import Navlink from "./@components/shared/Navlink";
+import Navlink from "./Navlink";
 
 const drawerWidth = 240;
 
@@ -71,7 +71,7 @@ ElevationScroll.propTypes = {
 };
 
 export default function DrawerAppBar(props) {
-  const { isLoggedIn } = useStoreContext();
+  const { isLoggedIn,Logout } = useStoreContext();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const { window } = props;
 
@@ -107,7 +107,7 @@ export default function DrawerAppBar(props) {
           {PROFILE_ITEMS.map((item,index) => {
             return (
               <Navlink key={index} href={item.link} className="hover:bg-gray-100 p-2">
-                <Button className="block text-black p-4">{item.text}</Button>
+                <Button className="block text-black p-4" onClick={item.text==="Logout"?Logout:""}>{item.text}</Button>
               </Navlink>
             );
           })}
@@ -130,7 +130,7 @@ export default function DrawerAppBar(props) {
       {/* <CssBaseline /> */}
       <HideOnScroll {...props}>
      
-        <AppBar component="nav" className="py-2 bg-neutral-100" elevation={0}>
+        <AppBar component="nav" className="py-2 bg-gray-200" elevation={0}>
           
 
           
@@ -144,7 +144,7 @@ export default function DrawerAppBar(props) {
             >
               <MenuIcon />
             </IconButton>
-            <Image src={Logo} component="div"></Image>
+            <Image src={Logo} component="div" className="w-[15rem]"></Image>
             {/* <Typography
               className="text-2xl font-bold sm:text-3xl"
               component="div"

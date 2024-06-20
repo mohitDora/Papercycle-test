@@ -1,14 +1,16 @@
-"use client"
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Input as BaseInput } from "@mui/base/Input";
 import { Box, styled } from "@mui/system";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import { useStoreContext } from "@/Context/store";
 import Image from "next/image";
 import Login from "@/assets/Login.svg";
 import text from "@/assets/text.svg";
 import dustbin from "@/assets/dustbin.svg";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { useRouter } from "next/navigation";
 
 function OTP({ separator, length, value, onChange }) {
   const inputRefs = React.useRef(new Array(length).fill(null));
@@ -134,8 +136,6 @@ function OTP({ separator, length, value, onChange }) {
     }
   };
 
-
-
   return (
     <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
       {new Array(length).fill(null).map((_, index) => (
@@ -173,16 +173,36 @@ OTP.propTypes = {
 };
 
 export default function OTPInput() {
-  const [otp, setOtp] = React.useState("");
-  const { setStep,verifyOTP,isLoading,setSonner, handleSnackbarOpen} = useStoreContext();
+  const { verifyOTP, isLoading, handleSnackbarOpen, sendOTP, phoneNumber } =
+    useStoreContext();
+
+  const [otp, setOtp] = useState("");
+  const initialTime =
+    typeof window !== "undefined"
+      ? parseInt(localStorage.getItem("countdownTime")) || 60
+      : 10;
+  const [timeLeft, setTimeLeft] = useState(initialTime);
+  useEffect(() => {
+    let timer;
+    if (typeof window !== "undefined") {
+      timer = setInterval(() => {
+        if (timeLeft > 0) {
+          setTimeLeft(timeLeft - 1);
+          localStorage.setItem("countdownTime", timeLeft - 1);
+        }
+      }, 1000);
+    }
+
+    return () => clearInterval(timer);
+  }, [timeLeft]);
+  const Router = useRouter();
 
   const verifyOTPFunc = async () => {
     try {
-      await verifyOTP(otp)
+      await verifyOTP(otp);
 
       handleSnackbarOpen();
     } catch (error) {
-
       handleSnackbarOpen();
       console.log(error);
     }
@@ -192,45 +212,73 @@ export default function OTPInput() {
     if (otp.length !== 6) {
       return;
     }
-    verifyOTPFunc()
+    verifyOTPFunc();
+  };
+
+  const handleButtonClick = async () => {
+    await sendOTP(phoneNumber);
+    handleSnackbarOpen();
+    localStorage.setItem("countdownTime", 60);
+    setTimeLeft(60);
   };
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-12">
-      <div className="hidden md:flex flex-col lg:w-2/3 gap-4 ">
-      <Image src={text} ></Image>
-      <Image src={Login} ></Image>
+     
+
+      <div className="hidden lg:flex flex-col lg:w-2/3 gap-4 ">
+        <Image src={text}></Image>
+        <Image src={Login}></Image>
       </div>
       <div className="lg:w-1/3">
-      <div className="mx-auto max-w-lg text-center flex flex-col gap-4 items-center">
-        <h1 className="text-2xl font-bold sm:text-3xl">Enter The OTP</h1>
+      <IconButton onClick={() => Router.back()}>
+        <ArrowBackIosNewIcon></ArrowBackIosNewIcon>
+      </IconButton>
+        <div className="mx-auto max-w-lg text-center flex flex-col gap-4 items-center">
+          <h1 className="text-2xl font-bold sm:text-3xl">Enter The OTP</h1>
 
-        <p className=" text-gray-500">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero
-          nulla eaque error neque ipsa culpa autem, at itaque nostrum!
-        </p>
-        <Image src={dustbin}></Image>
-        <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 2,justifyContent:"center"
-        }}
-      >
-        <OTP
-          separator={<span> </span>}
-          value={otp}
-          onChange={setOtp}
-          length={6}
-        />
-        <Button disableElevation onClick={buttonClick} variant="contained" className={!isLoading?"text-white":"bg-gray-200 text-gray-600 hover:bg-gray-200"}>{isLoading? "Verifying":"Submit"}</Button>
-        <div>
-            <p className="text-gray-500">Resend in 00:00</p>
-            
-            <p className="text-gray-500 cursor-pointer" onClick={()=>setStep(1)}>Edit Number</p>
+          <p className=" text-gray-500">
+            we have send an OTP to your mobile number ******
+            {phoneNumber.substring(6, 10)}
+          </p>
+          <Image src={dustbin}></Image>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              justifyContent: "center",
+            }}
+          >
+            <OTP
+              separator={<span> </span>}
+              value={otp}
+              onChange={setOtp}
+              length={6}
+            />
+            <Button
+              disableElevation
+              onClick={buttonClick}
+              variant="contained"
+              className={
+                !isLoading
+                  ? "text-white"
+                  : "bg-gray-200 text-gray-600 hover:bg-gray-200"
+              }
+            >
+              {isLoading ? "Verifying" : "Submit"}
+            </Button>
+            <div>
+              <div className="flex items-center">
+                <p>{`Resend OTP in ${timeLeft} seconds`}</p>
+                {/* <Timer timeLeft={timeLeft} /> */}
+                <Button onClick={handleButtonClick} disabled={timeLeft}>
+                  Resend OTP
+                </Button>
+              </div>
+            </div>
+          </Box>
         </div>
-      </Box>
-      </div>
       </div>
     </div>
   );

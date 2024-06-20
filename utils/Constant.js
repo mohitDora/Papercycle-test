@@ -40,6 +40,10 @@ export const PROFILE_ITEMS = [
     text: "Help and Support",
     link: "/helpSupport",
   },
+  {
+    text: "Logout",
+    link: "/auth/phonenumber",
+  },
 ];
 
 export const Address=`OU-640, 6th Floor, Nexus Esplanade,

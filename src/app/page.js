@@ -1,6 +1,6 @@
 "use client";
 import { Button, TextField } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useStoreContext } from "@/Context/store";
 import { CONTACT_DETAILS, MESSAGE } from "../../utils/Constant";
 import Image from "next/image";
@@ -32,7 +32,7 @@ const MenuProps = {
 const names = ["Oliver Hansen", "Van Henry", "April Tucker"];
 
 function recycle() {
-  const {hasToken}=useStoreContext()
+  const {setIsLoggedIn}=useStoreContext()
   const [value, setValue] = React.useState(dayjs("2022-04-17"));
   const [time1, setTime1] = React.useState(dayjs("2022-04-17T15:30"));
   const [time2, setTime2] = React.useState(dayjs("2022-04-17T12:30"));
@@ -48,12 +48,14 @@ function recycle() {
       typeof value === "string" ? value.split(",") : value
     );
   };
-
+useEffect(()=>{
+  setIsLoggedIn(true);
+},[])
 
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 flex flex-col lg:flex-row-reverse gap-12">
-      <Image src={recycle_image} className="lg:w-2/3"></Image>
+      <Image src={recycle_image} className="hidden lg:block lg:w-2/3"></Image>
       <div className="lg:w-1/3">
         <div className="mx-auto max-w-lg text-center">
           <h1 className="text-2xl font-bold sm:text-3xl">

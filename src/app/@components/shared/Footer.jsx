@@ -14,14 +14,14 @@ import Image from "next/image";
 import Logo from "@/assets/logo ppcy.svg";
 
 function Footer() {
-  const { isLoggedIn } = useStoreContext();
+  const { isLoggedIn,Logout } = useStoreContext();
   return (
     <footer className="bg-gray-200 mt-12">
       <div className="px-12 md:max-w-screen-xl m-auto flex flex-col md:flex-row justify-between  gap-12 py-16">
         <div className="flex flex-col">
           <div>
             <div>
-            <Image src={Logo} component="div" width={300}></Image>
+            <Image src={Logo} component="div" className="w-[20rem]"></Image>
               {/* <Typography className="text-secondary font-bold" variant="h2">
                 PaperCycle
               </Typography> */}
@@ -81,7 +81,7 @@ function Footer() {
                 PROFILE_ITEMS?.map((item, index) => {
                   return (
                     <Typography key={index}>
-                      <Link href={item.link}>{item.text}</Link>
+                      <Link href={item.link} onClick={item.text==="Logout"?Logout:""}>{item.text}</Link>
                     </Typography>
                   );
                 })}

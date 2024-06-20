@@ -21,8 +21,16 @@ function PhoneNumber() {
     const { value } = event.target;
     const formattedValue = value.replace(/[^\d]/g, "");
     setPhoneNumber(formattedValue);
+    localStorage.setItem('phoneNumber', formattedValue);
     console.log(phoneNumber);
   };
+
+  useEffect(() => {
+    const storedPhoneNumber = localStorage.getItem('phoneNumber');
+    if (storedPhoneNumber) {
+      setPhoneNumber(storedPhoneNumber);
+    }
+  }, []);
 
   const sendOTPFunc = async () => {
     try {
