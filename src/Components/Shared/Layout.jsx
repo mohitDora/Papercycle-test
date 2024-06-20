@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ThemeProvider } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { StoreProvider, useStoreContext } from "../../../lib/Context/store";
 import theme from "../../../lib/Theme/theme";
 import Sonner from "./Sonner";
@@ -28,6 +28,7 @@ const Layout = ({ children }) => {
         <StoreProvider>
             <StyledEngineProvider injectFirst>
             <ThemeProvider theme={theme}>
+                <CssBaseline></CssBaseline>
                 <LayoutContent>{children}</LayoutContent>
             </ThemeProvider>
             </StyledEngineProvider>
