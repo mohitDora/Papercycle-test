@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import SelectCity from "./@sections/SelectCity";
 import SelectCategory from "./@sections/SelectCategory";
 import { Input, TextField } from "@mui/material";
-import Heading from "@/Components/ui/Heading";
+import Heading from "@/app/@components/ui/Heading";
 import ShowCategoryData from "./@sections/ShowCategoryData";
 import { BASE_URL } from "../../../utils/Constant";
-import Loading from "@/Components/ui/Loading";
+import Loading from "@/app/@components/ui/Loading";
 
 function page() {
   const [city, setCity] = useState(["Bhubaneswar"]);

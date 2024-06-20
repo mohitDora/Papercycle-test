@@ -1,8 +1,8 @@
-import Heading from "@/Components/ui/Heading";
+import Heading from "@/app/@components/ui/Heading";
 import Image from "next/image";
 import React from "react";
 import Price from "../@components/Price";
-import Subheading from "@/Components/ui/Subheading";
+import Subheading from "@/app/@components/ui/Subheading";
 
 function ShowCategoryData({prices,category}) {
   return (

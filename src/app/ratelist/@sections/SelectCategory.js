@@ -1,4 +1,4 @@
-import Subheading from "@/Components/ui/Subheading";
+import Subheading from "@/app/@components/ui/Subheading";
 import React from "react";
 
 export default function SelectCategory({ selectedTab, onTabChange,tabs }) {

@@ -8,7 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Box } from "@mui/material";
-import Sonner from "../../Components/Shared/Sonner";
+import Sonner from "../@components/shared/Sonner";
 import { useStoreContext } from "@/Context/store";
 
 export default function FormDialog() {

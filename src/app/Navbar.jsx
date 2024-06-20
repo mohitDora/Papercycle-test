@@ -23,7 +23,7 @@ import { useStoreContext } from "@/Context/store";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "@/assets/logo ppcy.svg";
-import Navlink from "../Components/Shared/Navlink";
+import Navlink from "./@components/shared/Navlink";
 
 const drawerWidth = 240;
 

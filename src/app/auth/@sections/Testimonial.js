@@ -1,5 +1,5 @@
-import Card from '@/Components/ui/Card'
-import Heading from '@/Components/ui/Heading'
+import Card from '@/app/@components/ui/Card'
+import Heading from '@/app/@components/ui/Heading'
 import React from 'react'
 
 function Testimonial() {

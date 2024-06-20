@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Status from "./@sections/Status";
-import Heading from "@/Components/ui/Heading";
+import Heading from "@/app/@components/ui/Heading";
 import { useStoreContext } from "@/Context/store";
 import { useRouter } from "next/navigation";
 

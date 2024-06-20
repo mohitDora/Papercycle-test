@@ -2,8 +2,8 @@
 
 import React from "react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { StoreProvider, useStoreContext } from "../../../lib/Context/store";
-import theme from "../../../lib/Theme/theme";
+import { StoreProvider, useStoreContext } from "@/Context/store";
+import theme from "@/Theme/theme";
 import Sonner from "./Sonner";
 import { StyledEngineProvider } from "@mui/material";
 

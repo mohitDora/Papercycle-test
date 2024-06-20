@@ -1,4 +1,4 @@
-import Heading from "@/Components/ui/Heading";
+import Heading from "@/app/@components/ui/Heading";
 import React from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import ScaleIcon from "@mui/icons-material/Scale";

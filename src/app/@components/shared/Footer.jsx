@@ -6,12 +6,12 @@ import {
   NAV_ITEMS,
   PROFILE_ITEMS,
   SOCIAL_MEDIA,
-} from "../../../utils/Constant";
+} from "@/Constant";
 import { Typography } from "@mui/material";
 import Link from "next/link";
-import { useStoreContext } from "../../../lib/Context/store";
+import { useStoreContext } from "@/Context/store";
 import Image from "next/image";
-import Logo from "../../../lib/assets/logo ppcy.svg";
+import Logo from "@/assets/logo ppcy.svg";
 
 function Footer() {
   const { isLoggedIn } = useStoreContext();

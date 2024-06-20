@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import Table from "@/Components/ui/Table";
+import Table from "@/app/@components/ui/Table";
 import { useStoreContext } from "@/Context/store";
 
 export default function Upcoming() {

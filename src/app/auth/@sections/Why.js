@@ -1,8 +1,8 @@
-import Card from "@/Components/ui/Card";
-import Heading from "@/Components/ui/Heading";
+import Card from "@/app/@components/ui/Card";
+import Heading from "@/app/@components/ui/Heading";
 import React from "react";
 import { COMPONENTS_DATA2 } from "../../../../utils/Constant";
-import Card2 from "@/Components/ui/Card2";
+import Card2 from "@/app/@components/ui/Card2";
 
 function Why() {
   return (
