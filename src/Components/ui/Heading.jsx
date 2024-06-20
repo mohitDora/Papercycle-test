@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import React from 'react';
 
 function Heading({ title }) {
@@ -7,7 +8,8 @@ function Heading({ title }) {
   const words = title.split(' ');
 
   return (
-    <div className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl py-12'>
+    <>
+    <Box className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl py-12'>
       {words.map((word, index) => (
         <span
           key={index}
@@ -17,7 +19,8 @@ function Heading({ title }) {
           {index < words.length - 1 && ' '} {/* Add space between words */}
         </span>
       ))}
-    </div>
+    </Box>
+    </>
   );
 }
 
