@@ -1,6 +1,7 @@
+import React from "react";
 import Card from "@/Components/ui/Card";
 import Heading from "@/Components/ui/Heading";
-import React from "react";
+
 import { COMPONENTS_DATA1 } from "../../../../utils/Constant";
 import Card2 from "@/Components/ui/Card2";
 
