@@ -126,7 +126,7 @@ export default function DrawerAppBar(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <div className="flex mb-20 important">
+    <Box className="flex mb-20 important">
       {/* <CssBaseline /> */}
       <HideOnScroll {...props}>
      
@@ -238,7 +238,7 @@ export default function DrawerAppBar(props) {
           {drawer}
         </Drawer>
       </nav>
-    </div>
+    </Box>
   );
 }
 

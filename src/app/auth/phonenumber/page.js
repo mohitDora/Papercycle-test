@@ -107,7 +107,7 @@ function PhoneNumber() {
             <p className=" text-gray-500">Facing any issues?</p>
             <p className=" text-gray-500">
               Call us at{" "}
-              <span className="text-lime-500">{CONTACT_DETAILS[0].value}</span>
+              <span className="text-secondary">{CONTACT_DETAILS[0].value}</span>
             </p>
           </div>
         </form>
