@@ -4,6 +4,7 @@ import React from "react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { StoreProvider, useStoreContext } from "../../../lib/Context/store";
 import theme from "../../../lib/Theme/theme";
+import "../../app/globals.css"
 import Sonner from "./Sonner";
 import { StyledEngineProvider } from "@mui/material";
 
