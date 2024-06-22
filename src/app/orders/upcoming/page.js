@@ -1,36 +1,33 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "@/app/@components/ui/Table";
 import { useStoreContext } from "@/Context/store";
+import CircularLoader from "@/app/@components/ui/CircularLoader";
 
 export default function Upcoming() {
-    const {setTab}=useStoreContext()
-    useEffect(()=>{
-        setTab("upcoming")
-    })
+    const {setTab,getRecycleOrderByUser,isLoading}=useStoreContext();
+    const [upcomingOrderData,setUpcomingOrderData]=useState([])
 
-    function createData(name, calories, fat) {
-        return { name, calories, fat };
-      }
-      const columns=["name","calories","fat","edit"] 
-    const rows = [
-        createData('Cupcake', 305, 3.7),
-        createData('Donut', 452, 25.0),
-        createData('Eclair', 262, 16.0),
-        createData('Frozen yoghurt', 159, 6.0),
-        createData('Gingerbread', 356, 16.0),
-        createData('Honeycomb', 408, 3.2),
-        createData('Ice cream sandwich', 237, 9.0),
-        createData('Jelly Bean', 375, 0.0),
-        createData('KitKat', 518, 26.0),
-        createData('Lollipop', 392, 0.2),
-        createData('Marshmallow', 318, 0),
-        createData('Nougat', 360, 19.0),
-        createData('Oreo', 437, 18.0),
-      ].sort((a, b) => (a.calories < b.calories ? -1 : 1));
+  const getUpcomingOrderData=async()=>{
+    const res=await getRecycleOrderByUser()
+    console.log("upcoming",res)
+    const data=res?.data?.filter((item,index)=>{
+      return item?.status==="upcoming"
+    })
+    const newArray = data?.map(({ date, id }) => ({ date,id }));
+    setUpcomingOrderData(newArray);
+  }
+
+    useEffect(()=>{
+        setTab("upcoming");
+        getUpcomingOrderData()
+    },[])
+
+      const columns=["date","id","edit"] 
+ const columnsToDisplay=["Date","Message"]
   return (
-    <>
-      <Table rows={rows} columns={columns}></Table>
-    </>
+   
+        isLoading?<CircularLoader></CircularLoader>:<Table rows={upcomingOrderData} columns={columns} columnsToDisplay={columnsToDisplay}></Table>
+   
   );
 }

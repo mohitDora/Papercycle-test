@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,79 +7,134 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Subheading from "@/app/@components/ui/Subheading";
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { IconButton } from "@mui/material";
 import { useRouter } from "next/navigation";
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
+import { useStoreContext } from "@/Context/store";
+import { useParams } from "next/navigation";
+import DateConverter from "@/DateConverter";
+import CircularLoader from "@/app/@components/ui/CircularLoader";
 
 export default function BasicTable() {
-  const Router=useRouter()
-  return (
+  const Router = useRouter();
+  const { getRecycleOrderById } = useStoreContext();
+  const [singleOrderData, setSingleOrderData] = React.useState({});
+  const { orderid } = useParams();
+  const [totalValue, setTotalvalue] = React.useState({});
+
+  const getSingleOrderData = async () => {
+    const res = await getRecycleOrderById(orderid);
+    const fetchedData = res?.data;
+
+    if (fetchedData) {
+      setSingleOrderData(fetchedData);
+      const totalPrice =
+        fetchedData.items?.reduce((sum, obj) => sum + obj.subTotal, 0) || 0;
+      const totalQuantity =
+        fetchedData.items?.reduce((sum, obj) => sum + obj.itemQuantity, 0) || 0;
+      setTotalvalue({ totalPrice, totalQuantity });
+    }
+  };
+  console.log("data", singleOrderData);
+  console.log("data", totalValue);
+
+  React.useEffect(() => {
+    getSingleOrderData();
+  }, [orderid]);
+
+  const columns = ["itemPrice", "itemQuantity", "itemType", "subTotal"];
+  const columnsToDisplay = ["Rate/kg", "Qty. in kg", "Items", "Amount"];
+  return Object.keys(singleOrderData)?.length === 0 ? (
+    <CircularLoader></CircularLoader>
+  ) : (
     <>
-    <IconButton onClick={()=>Router.back()}>
-<ArrowBackIosNewIcon></ArrowBackIosNewIcon>
-</IconButton>
+      <IconButton onClick={() => Router.back()}>
+        <ArrowBackIosNewIcon></ArrowBackIosNewIcon>
+      </IconButton>
+      <div className="my-4">
       <Subheading title="Order Details"></Subheading>
-      <div className="flex flex-col md:flex-row-reverse gap-4">
-      <article className="md:w-2/4 relative flex iems-center gap-4 rounded-lg border border-gray-500 bg-hite p-6 flex-col">
-        <div>
-          <p className="text-sm text-gray-500">Full Name</p>
-          <p className="text-2xl font-medium text-gray-900">$240.94</p>
-        </div>
-        <div>
-          <p className="text-sm text-gray-500">Total Sales</p>
-          <p className="text-2xl font-medium text-gray-900">email@gmail.com</p>
-        </div>
-        <div>
-          <p className="text-sm text-gray-500">Date</p>
-          <p className="text-2xl font-medium text-gray-900">email@gmail.com</p>
-        </div>
-        <div>
-          <p className="text-sm text-gray-500">Download </p>
-        </div>
-      </article>
+      </div>
       
-      <TableContainer>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell align="right">Calories</TableCell>
-              <TableCell align="right">Fat&nbsp;(g)</TableCell>
-              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-              <TableCell align="right">Protein&nbsp;(g)</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row.name}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell align="right">{row.calories}</TableCell>
-                <TableCell align="right">{row.fat}</TableCell>
-                <TableCell align="right">{row.carbs}</TableCell>
-                <TableCell align="right">{row.protein}</TableCell>
+      <div className="flex flex-col lg:flex-row-reverse gap-12">
+        <article className="lg:w-2/5 relative flex iems-center gap-4 rounded-lg border bg-gray-100 bg-hite p-6 flex-col">
+          <div>
+            <p className="text-sm text-gray-500">Order Date</p>
+            <p className="text-2xl font-medium text-gray-900">
+              {DateConverter(singleOrderData?.orderTime)}
+            </p>
+          </div>
+          {singleOrderData?.status === "upcoming" ? (
+            <>
+              <div>
+                <p className="text-sm text-gray-500">Order Status</p>
+                <p className="text-2xl font-medium text-gray-900">
+                  Order Placed
+                </p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">Edit</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div>
+                <p className="text-sm text-gray-500">Transaction Status</p>
+                <p className="text-2xl font-medium text-secondary">
+                  {singleOrderData?.paymentId?.status === "success"
+                    ? `Transaction Successful on ${DateConverter(
+                        singleOrderData?.completionTime
+                      )}`
+                    : "Transaction Pending"}
+                </p>
+              </div>
+
+              {singleOrderData?.paymentId?.status === "success" ? (
+                <div>
+                  <p className="text-sm text-gray-500">Transaction Id</p>
+                  <p className="text-2xl font-medium text-gray-900">
+                    {singleOrderData?.paymentId?.payout_id}
+                  </p>
+                </div>
+              ) : (
+                ""
+              )}
+
+              <div>
+                <p className="text-sm text-gray-500 underline">
+                  Download Invoice
+                </p>
+              </div>
+            </>
+          )}
+        </article>
+        <TableContainer>
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                {columnsToDisplay?.map((item, index) => {
+                  return <TableCell key={index}>{item}</TableCell>;
+                })}
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      
+            </TableHead>
+            <TableBody>
+              {singleOrderData?.items?.map((row, index) => {
+                return (
+                  <TableRow key={index}>
+                    {columns?.map((item, index) => {
+                      return <TableCell key={index}>{row[item]}</TableCell>;
+                    })}
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+          <div className="flex gap-4">
+          <div className="flex items-center justify-center">Total Price : &nbsp;<Subheading title={`RS ${totalValue?.totalPrice}`}></Subheading></div>
+          <div className="flex items-center justify-center">Total Quantity : &nbsp;<Subheading title={`${totalValue?.totalQuantity} Kg`}></Subheading></div>
+          </div>
+
+        </TableContainer>
+        
       </div>
     </>
   );

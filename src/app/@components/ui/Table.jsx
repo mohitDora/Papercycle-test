@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import * as React from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
@@ -19,6 +19,10 @@ import { TableHead, Tooltip } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DescriptionIcon from "@mui/icons-material/Description";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import empty from "@/assets/empty.svg";
+import Link from "next/link";
+import { useStoreContext } from "@/Context/store";
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -89,10 +93,15 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-export default function CustomPaginationActionsTable({ rows, columns }) {
+export default function CustomPaginationActionsTable({
+  rows,
+  columns,
+  columnsToDisplay,
+}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const Router=useRouter()
+  const Router = useRouter();
+  const {isLoading}=useStoreContext()
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -107,12 +116,31 @@ export default function CustomPaginationActionsTable({ rows, columns }) {
     setPage(0);
   };
 
+
+  
+  if (rows.length == 0) {
+    return (
+      <div className="flex justify-center items-center p-12 flex-col bg-gray-100 gap-2">
+        <Image src={empty}></Image>
+        <div className="text-center">
+          <p className="text-sm text-gray-700">No pickup orders to show !</p>
+          <p className="text-sm">
+            Place your{" "}
+            <Link href="/" className="text-secondary underline">
+              recycle order here.
+            </Link>
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <TableContainer>
       <Table aria-label="custom pagination table">
         <TableHead>
           <TableRow>
-            {columns?.map((item, index) => {
+            {columnsToDisplay?.map((item, index) => {
               if (item === "edit" || item === "download invoice") {
                 return <TableCell key={index}>{""}</TableCell>;
               }
@@ -124,9 +152,13 @@ export default function CustomPaginationActionsTable({ rows, columns }) {
           {(rowsPerPage > 0
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
-          ).map((row,index) => {
+          ).map((row, index) => {
             return (
-              <TableRow onClick={()=>Router.push("/orders/22")} className="hover:bg-gray-200 cursor-pointer" key={index}>
+              <TableRow
+                onClick={() => Router.push(`/orders/${row?.id}`)}
+                className="hover:bg-gray-200 cursor-pointer"
+                key={index}
+              >
                 {columns?.map((item, index) => {
                   if (item === "edit" || item === "download invoice") {
                     return (

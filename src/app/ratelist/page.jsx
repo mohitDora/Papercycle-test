@@ -7,6 +7,7 @@ import Heading from "@/app/@components/ui/Heading";
 import ShowCategoryData from "./@sections/ShowCategoryData";
 import { BASE_URL } from "../../../utils/Constant";
 import Loading from "@/app/@components/ui/Loading";
+import { useStoreContext } from "@/Context/store";
 
 function page() {
   const [city, setCity] = useState(["Bhubaneswar"]);
@@ -14,6 +15,8 @@ function page() {
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+
+  const { isLoading, setIsLoading } = useStoreContext();
 
   const handleDataOfCity = (data) => {
     setCity(data);
@@ -26,6 +29,7 @@ function page() {
   };
 
   const getData = async () => {
+    setIsLoading(true);
     try {
       const res = await fetch(
         `${BASE_URL}/api/recycle/getRateChart/${city[0]}`
@@ -36,11 +40,13 @@ function page() {
       }
 
       const result = await res.json();
-      console.log(result)
+
       setData(result?.data?.categories);
       setFilteredData(result?.data?.categories);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   useEffect(() => {
@@ -69,6 +75,28 @@ function page() {
     );
   });
 
+  function filterCategories(input) {
+    if (!input) {
+      return data?.filter((item) => {
+        if (selectedTab === "All") {
+          return item;
+        }
+        return selectedTab === item.category;
+      });
+    } else {
+      const lowerInput = input.toLowerCase();
+      const filteredCategories = filteredData.filter((category) => {
+        return category.prices.some((item) =>
+          item.item.toLowerCase().includes(lowerInput)
+        );
+      });
+      return filteredCategories;
+    }
+  }
+  useEffect(() => {
+    setFilteredData(filterCategories(search));
+  }, [search]);
+  console.log("data", filteredData);
   return (
     <>
       <Heading title="Dry waste rate list"></Heading>
@@ -82,17 +110,23 @@ function page() {
           placeholder="Search any material"
         />
       </div>
-     
-      {showCategories.length?
-      <>
-       <SelectCategory
-        selectedTab={selectedTab}
-        onTabChange={handleTabChange}
-        tabs={data}
-      />
-      {showCategories}
-      </>
-      :<Loading num={6}></Loading>}
+
+      {data.length == 0 ? (
+        <Loading num={6}></Loading>
+      ) : (
+        <>
+          <SelectCategory
+            selectedTab={selectedTab}
+            onTabChange={handleTabChange}
+            tabs={data}
+          />
+          {!showCategories.length == 0 ? (
+            showCategories
+          ) : (
+            <p>No such Items Available</p>
+          )}
+        </>
+      )}
     </>
   );
 }
