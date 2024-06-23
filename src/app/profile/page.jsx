@@ -7,17 +7,21 @@ import { Divider, IconButton, Tooltip } from "@mui/material";
 import OpacityIcon from "@mui/icons-material/Opacity";
 import ForestIcon from "@mui/icons-material/Forest";
 import { useStoreContext } from "@/Context/store";
-import Loading from "../@components/ui/Loading";
+import { removeDuplicate } from "@/RemoveDuplicate";
+import CircularLoader from "../@components/ui/CircularLoader";
+import FormDialog from "../@Sections/Dialog";
 
 function profile() {
   const [userData, setUserData] = useState({});
-
-  const { getMe,isLoading } = useStoreContext();
+  const { getMe,userAddresses } = useStoreContext();
 
   useEffect(() => {
     const getMeData = async () => {
       const res = await getMe();
-      setUserData(res?.data);
+      if(res?.data){
+        setUserData(res?.data);
+      }
+      
     };
     getMeData();
   }, []);
@@ -27,7 +31,7 @@ function profile() {
     <>
       <Heading title="My Profile"></Heading>
       {
-        Object.keys(userData).length === 0?<Loading num={6}></Loading>
+        Object.keys(userData).length === 0?<CircularLoader></CircularLoader>
       :
       <div className="flex flex-col gap-4">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 ">
@@ -93,12 +97,12 @@ function profile() {
 
           <article className="md:w-2/4 rounded-lg border bg-gray-100 b p-6">
             <p>Address</p>
-            {userData?.savedAddresses === 0 ? (
-              <p>No Address</p>
+            {removeDuplicate(userAddresses,"addressLine").length == 0 ? (
+              <p className="p-4 ">No Address Found</p>
             ) : (
-              userData?.savedAddresses?.map((item, index) => {
+              removeDuplicate(userAddresses,"addressLine")?.map((item, index) => {
                 return (
-                  <div>
+                  <div key={index}>
                     <div className="flex items-center gap-2">
                       <p className="text-2xl font-medium text-gray-900">{item?.nickName}</p>
                       <Tooltip title="Edit">
@@ -110,14 +114,13 @@ function profile() {
 
                     <p className="text-sm text-gray-500">
                       {item?.addressLine}
-                      {item?.landmark}
-                      {item?.selectedLocality}
                     </p>
                     <Divider className="my-4"></Divider>
                   </div>
                 );
               })
             )}
+            <FormDialog></FormDialog>
           </article>
         </div>
       </div>}

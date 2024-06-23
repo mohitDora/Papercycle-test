@@ -14,8 +14,6 @@ export default function Sonner({ open, handleClose,severity,message }) {
         onClose={handleClose}
         severity={severity}
         variant="filled"
-        clssName="bg-lime-500"
-        // sx={{ width: "100%" }}
       >
         {message}
       </Alert>

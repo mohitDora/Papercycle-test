@@ -19,6 +19,8 @@ const style2={
 }
 
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+export const GOOGLE_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
+export const PLACE_ID = process.env.NEXT_PUBLIC_PLACE_ID;
 
 export const NAV_ITEMS=[
     {text:"Home",link:"/auth/phonenumber",isLoggedIn:false},
@@ -57,14 +59,6 @@ export const BUTTON_PARAMS = {
   others: false,
 };
 
-// export const FOOTER_ITEMS = [
-//   { text: "Recycle", link: "/recycle" },
-//   { text: "Rate list", link: "/rateList" },
-//   { text: "About", link: "/about" },
-//   { text: "Profile", link: "/profile" },
-//   { text: "My Orders", link: "/orders" },
-//   { text: "Help & Support", link: "/helpSupport" },
-// ];
 
 export const SOCIAL_MEDIA=[
   {

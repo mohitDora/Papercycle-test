@@ -23,7 +23,7 @@ export default function SelectCategory({ selectedTab, onTabChange,tabs }) {
         {
           tabs?.map((item,index)=>{
             return(
-<button
+<button key={index}
             onClick={() => onTabChange(item.category)}
             className={`shrink-0 rounded-lg p-2 text-sm font-medium ${
               selectedTab === item.category

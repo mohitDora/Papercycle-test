@@ -7,7 +7,7 @@ function helpSupport() {
   return (
     <>
     <Heading title="Help and Support"></Heading>
-    <Image src={help_support} className='m-auto'></Image>
+    <Image src={help_support} className='m-auto' alt='image.svg'></Image>
     </>
   )
 }

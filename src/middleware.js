@@ -28,7 +28,7 @@ export const config = {
     '/auth/phonenumber',
     '/auth/verify',
     '/auth/register',
-    '/orders/:id',
+    '/orders/:id*',
     '/helpsupport'
   ]
 }

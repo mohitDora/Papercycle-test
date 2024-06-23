@@ -221,14 +221,18 @@ export default function OTPInput() {
     localStorage.setItem("countdownTime", 60);
     setTimeLeft(60);
   };
+  useEffect(()=>{
+    localStorage.setItem("countdownTime", 60);
+    setTimeLeft(60);
+  },[])
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-12">
      
 
       <div className="hidden lg:flex flex-col lg:w-2/3 gap-4 ">
-        <Image src={text}></Image>
-        <Image src={Login}></Image>
+        <Image src={text} alt="image.svg"></Image>
+        <Image src={Login} alt="image.svg"></Image>
       </div>
       <div className="lg:w-1/3">
       <IconButton onClick={() => Router.back()}>
@@ -241,7 +245,7 @@ export default function OTPInput() {
             we have send an OTP to your mobile number ******
             {phoneNumber.substring(6, 10)}
           </p>
-          <Image src={dustbin}></Image>
+          <Image src={dustbin} alt="image.svg"></Image>
           <Box
             sx={{
               display: "flex",
@@ -263,7 +267,7 @@ export default function OTPInput() {
               className={
                 !isLoading
                   ? "text-white"
-                  : "bg-gray-200 text-gray-600 hover:bg-gray-200"
+                  : "bg-gray-200 text-gray-600 hover:bg-gray-200 cursor-not-allowed"
               }
             >
               {isLoading ? "Verifying" : "Submit"}

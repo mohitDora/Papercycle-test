@@ -8,6 +8,7 @@ import ShowCategoryData from "./@sections/ShowCategoryData";
 import { BASE_URL } from "../../../utils/Constant";
 import Loading from "@/app/@components/ui/Loading";
 import { useStoreContext } from "@/Context/store";
+import CircularLoader from "../@components/ui/CircularLoader";
 
 function page() {
   const [city, setCity] = useState(["Bhubaneswar"]);
@@ -23,6 +24,7 @@ function page() {
   };
   const handleTabChange = (tab) => {
     setSelectedTab(tab);
+    setSearch("")
   };
   const handleChange = (event) => {
     setSearch(event.target.value);
@@ -85,7 +87,7 @@ function page() {
       });
     } else {
       const lowerInput = input.toLowerCase();
-      const filteredCategories = filteredData.filter((category) => {
+      const filteredCategories = data.filter((category) => {
         return category.prices.some((item) =>
           item.item.toLowerCase().includes(lowerInput)
         );
@@ -112,7 +114,7 @@ function page() {
       </div>
 
       {data.length == 0 ? (
-        <Loading num={6}></Loading>
+       <CircularLoader></CircularLoader>
       ) : (
         <>
           <SelectCategory

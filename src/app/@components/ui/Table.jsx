@@ -121,7 +121,7 @@ export default function CustomPaginationActionsTable({
   if (rows.length == 0) {
     return (
       <div className="flex justify-center items-center p-12 flex-col bg-gray-100 gap-2">
-        <Image src={empty}></Image>
+        <Image src={empty} alt="empty.svg"></Image>
         <div className="text-center">
           <p className="text-sm text-gray-700">No pickup orders to show !</p>
           <p className="text-sm">

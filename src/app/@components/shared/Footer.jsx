@@ -14,14 +14,14 @@ import Image from "next/image";
 import Logo from "@/assets/logo ppcy.svg";
 
 function Footer() {
-  const { isLoggedIn,Logout } = useStoreContext();
+  const { Logout,token,isLoggedIn } = useStoreContext();
   return (
-    <footer className="bg-gray-200 mt-12">
+    <footer className="bg-gray-100 mt-12">
       <div className="px-12 md:max-w-screen-xl m-auto flex flex-col md:flex-row justify-between  gap-12 py-16">
         <div className="flex flex-col">
           <div>
             <div>
-            <Image src={Logo} component="div" className="w-[20rem]"></Image>
+            <Image src={Logo} component="div" className="w-[20rem]" alt="logo.svg"></Image>
               {/* <Typography className="text-secondary font-bold" variant="h2">
                 PaperCycle
               </Typography> */}
@@ -67,7 +67,7 @@ function Footer() {
             <div className="mt-4 space-y-2 text-sm">
               {NAV_ITEMS?.map((item, index) => {
                 if (
-                  item?.isLoggedIn == isLoggedIn ||
+                  item?.isLoggedIn == (isLoggedIn) ||
                   item?.isLoggedIn === "both"
                 ) {
                   return (
@@ -77,7 +77,7 @@ function Footer() {
                   );
                 }
               })}
-              {isLoggedIn &&
+              {(isLoggedIn) &&
                 PROFILE_ITEMS?.map((item, index) => {
                   return (
                     <Typography key={index}>

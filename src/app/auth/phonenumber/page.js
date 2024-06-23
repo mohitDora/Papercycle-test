@@ -14,7 +14,7 @@ function PhoneNumber() {
     setPhoneNumber,
     isLoading,
     handleSnackbarOpen,
-    setSonner,sendOTP
+    setIsLoggedIn,sendOTP
   } = useStoreContext();
 
   const handleChange = (event) => {
@@ -33,7 +33,7 @@ function PhoneNumber() {
         setPhoneNumber(storedPhoneNumber);
       }
     }
-
+setIsLoggedIn(false)
   }, []);
 
   const sendOTPFunc = async () => {
@@ -58,8 +58,8 @@ function PhoneNumber() {
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-12">
       <div className="hidden lg:flex flex-col lg:w-2/3 gap-4 ">
-      <Image src={text} ></Image>
-      <Image src={Login} ></Image>
+      <Image src={text} alt="image.svg"></Image>
+      <Image src={Login} alt="image.svg"></Image>
       </div>
       
       <div className="lg:w-1/3">
@@ -72,7 +72,7 @@ function PhoneNumber() {
           <p className=" text-gray-500">
             {MESSAGE}
           </p>
-          <Image src={dustbin} ></Image>
+          <Image src={dustbin} alt="image.svg"></Image>
         </div>
 
         <form
@@ -109,7 +109,7 @@ function PhoneNumber() {
               className={
                 !isLoading
                   ? "text-white"
-                  : "bg-gray-200 text-gray-600 hover:bg-gray-200"
+                  : "bg-gray-200 text-gray-600 hover:bg-gray-200 cursor-not-allowed"
               }
             >
               {isLoading ? "Sending" : "Send OTP"}

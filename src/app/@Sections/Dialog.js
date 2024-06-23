@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -7,20 +7,61 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { Box } from "@mui/material";
-import Sonner from "../@components/shared/Sonner";
 import { useStoreContext } from "@/Context/store";
+import Map from "../@components/ui/Map";
+import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 
 export default function FormDialog() {
-  // const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const {snackbarOpen, handleSnackbarClose,handleSnackbarOpen}=useStoreContext()
+  const { handleSnackbarOpen, addAddress, setSonner,getMe } = useStoreContext();
   const [open, setOpen] = useState(false);
-  const [selectedTab, setSelectedTab] = useState("notifications");
+  const [selectedTab, setSelectedTab] = useState("home");
+
+  const [marker, setMarker] = useState(null);
+  const [address, setAddress] = useState("");
+  const [postcode, setPostcode] = useState("");
+
   const [formValues, setFormValues] = useState({
-    fullAddress: "",
+    fullAddress: address,
     landmark: "",
-    pinCode: "",
+    pinCode: postcode,
   });
+
+  const addAddressTo = async () => {
+    
+    const address = {
+      coordinates: [marker.lat, marker.lng],
+      selectedLocality: "",
+      addressDetails: {
+        addressLine: formValues.fullAddress,
+        landmark: formValues.landmark,
+      },
+      radioSelected: selectedTab,
+    };
+    try {
+      const res = await addAddress(address);
+      console.log(res);
+      setSonner({
+        severity: "success",
+        message: "Address Added successfully",
+      });
+      handleSnackbarOpen();
+      
+    } catch (error) {
+      setSonner({
+        severity: "error",
+        message: "Something Went Wrong",
+      });
+      handleSnackbarOpen();
+    }
+  };
+
+  useEffect(() => {
+    setFormValues({
+      ...formValues,
+      fullAddress: address,
+      pinCode: postcode,
+    });
+  }, [address, postcode]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -41,20 +82,18 @@ export default function FormDialog() {
       });
     }
   };
-  const handleTabChange = (tab) => {
-    setSelectedTab(tab);
+  const handleTabChange = (e) => {
+    setSelectedTab(e.target.value);
   };
 
-  // const handleSnackbarOpen = () => {
-  //   setSnackbarOpen(true);
-  // };
+  const handleSubmit=()=>{
+    addAddressTo();
+            handleSnackbarOpen();
+            handleClose();
+  }
 
-  // const handleSnackbarClose = (event, reason) => {
-  //   if (reason === "clickaway") {
-  //     return;
-  //   }
-  //   setSnackbarOpen(false);
-  // };
+  const Array = ["home", "business", "other"];
+
   return (
     <React.Fragment>
       <Button fullWidth className="py-4 flex gap-2" onClick={handleClickOpen}>
@@ -65,17 +104,27 @@ export default function FormDialog() {
         open={open}
         onClose={handleClose}
         PaperProps={{
-          component: "form",
-          onSubmit: (event) => {
-            event.preventDefault();
-            handleSnackbarOpen();
-            handleClose();
-          },
+
+          className: "min-w-[80%] lg:min-w-[60%] bg-transparnt",
+          // component: "form",
+          // onSubmit: (event) => {
+          //   event.preventDefault();
+          //   addAddressTo();
+          //   handleSnackbarOpen();
+          //   handleClose();
+          // },
         }}
       >
         <DialogTitle>Add Address</DialogTitle>
-        <DialogContent>
-          <div className="flex flex-col gap-4 py-4">
+        <DialogContent className="flex flex-col lg:flex-row gap-4 py-4">
+          <Map
+            setMarker={setMarker}
+            setPostcode={setPostcode}
+            setAddress={setAddress}
+            marker={marker}
+          ></Map>
+
+          <div className="flex flex-col gap-4 grow">
             <TextField
               placeholder="House No., building, apartment, street name"
               id="fullAddress"
@@ -94,7 +143,6 @@ export default function FormDialog() {
               variant="outlined"
               value={formValues.landmark}
               onChange={handleChange}
-              required
             />
             <TextField
               placeholder="Enter 6 digit PIN Code"
@@ -111,65 +159,33 @@ export default function FormDialog() {
               }}
               required
             />
-            <nav
-              className="flex gap-6 align-middle flex-wrap"
-              aria-label="Tabs"
+            
+            <RadioGroup
+              aria-labelledby="demo-controlled-radio-buttons-group"
+              name="controlled-radio-buttons-group"
+              value={selectedTab}
+              onChange={handleTabChange}
+              row
             >
-              <button
-                onClick={() => handleTabChange("settings")}
-                className={`shrink-0 rounded-lg p-2 text-sm font-medium ${
-                  selectedTab === "settings"
-                    ? "text-white bg-secondary"
-                    : "text-gray-500  hover:text-gray-700"
-                }`}
-              >
-                Settings
-              </button>
-
-              <button
-                onClick={() => handleTabChange("messages")}
-                className={`shrink-0 rounded-lg p-2 text-sm font-medium ${
-                  selectedTab === "messages"
-                    ? "text-white bg-secondary"
-                    : "text-gray-500  hover:text-gray-700"
-                }`}
-              >
-                Messages
-              </button>
-
-              <button
-                onClick={() => handleTabChange("archive")}
-                className={`shrink-0 rounded-lg p-2 text-sm font-medium ${
-                  selectedTab === "archive"
-                    ? "text-white bg-secondary"
-                    : "text-gray-500  hover:text-gray-700"
-                }`}
-              >
-                Archive
-              </button>
-
-              <button
-                onClick={() => handleTabChange("notifications")}
-                className={`shrink-0 rounded-lg p-2 text-sm font-medium ${
-                  selectedTab === "notifications"
-                    ? "text-white bg-secondary"
-                    : "text-gray-500  hover:text-gray-700"
-                }`}
-                aria-current={
-                  selectedTab === "notifications" ? "page" : undefined
-                }
-              >
-                Notifications
-              </button>
-            </nav>
+              {Array?.map((item, index) => {
+                return (
+                  <FormControlLabel
+                    key={index}
+                    value={item}
+                    control={<Radio />}
+                    label={item}
+                    className="capitalize"
+                  />
+                );
+              })}
+            </RadioGroup>
           </div>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Add</Button>
+          <Button onClick={handleSubmit}>Add</Button>
         </DialogActions>
       </Dialog>
-      <Sonner open={snackbarOpen} handleClose={handleSnackbarClose} />
     </React.Fragment>
   );
 }
