@@ -16,7 +16,7 @@ function Testimonial() {
   const handleFetchReviews = async () => {
     setIsLoading(true)
     try {
-      const response = await fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&key=${GOOGLE_API_KEY}`);
+      const response = await fetch(`/api/getReviews`);
   
       if (!response.ok) {
         setSonner({

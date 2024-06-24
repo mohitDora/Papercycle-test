@@ -25,7 +25,7 @@ function PhoneNumber() {
   useEffect(() => {
     const loggedIn = Cookies.get("token");
     if (loggedIn) {
-      Router.replace("/");
+      Router.push("/");
     }
   },[]);
 
@@ -68,7 +68,7 @@ function PhoneNumber() {
   const sendOTPFunc = async () => {
     try {
       await sendOTP(phoneNumber);
-      Router.replace("/auth/verify");
+      Router.push("/auth/verify");
       handleSnackbarOpen();
     } catch (error) {
       handleSnackbarOpen();
@@ -84,20 +84,20 @@ function PhoneNumber() {
   };
 
   return (
-    <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-12">
-      <div className="hidden lg:flex flex-col lg:w-2/3 gap-4 ">
+    <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-12 items-center">
+      <div className="hidden lg:flex flex-col lg:w-3/5 gap-4 ">
         <Image src={text} alt="image.svg"></Image>
         <Image src={Login} alt="image.svg"></Image>
       </div>
 
-      <div className="lg:w-1/3">
-        <div className="mx-auto max-w-lg text-center flex flex-col items-center gap-4">
+      <div className="lg:w-2/5 bg-gray-100 p-4 rounded-lg border">
+        <div className="mx-auto max-w-lg text-center flex flex-col gap-4">
           <h1 className="text-2xl font-bold sm:text-3xl">
             Schedule Your Pickup
           </h1>
 
           <p className=" text-gray-500">{MESSAGE}</p>
-          <Image src={dustbin} alt="image.svg"></Image>
+          <Image src={dustbin} alt="image.svg" className="self-center"></Image>
         </div>
 
         <form
@@ -110,6 +110,7 @@ function PhoneNumber() {
             </label>
             <div className="relative">
               <TextField
+              className="bg-white"
                 label="Phone Number"
                 type="tel"
                 value={phoneNumber}

@@ -276,12 +276,12 @@ export default function OTPInput() {
   });
   console.log(storedValue);
   return (
-    <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-12">
-      <div className="hidden lg:flex flex-col lg:w-2/3 gap-4 ">
+    <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-12 items-center">
+      <div className="hidden lg:flex flex-col lg:w-3/5 gap-4 ">
         <Image src={text} alt="image.svg"></Image>
         <Image src={Login} alt="image.svg"></Image>
       </div>
-      <div className="lg:w-1/3">
+      <div className="lg:w-2/5 bg-gray-100 p-4 rounded-lg border">
         <IconButton onClick={() => Router.back()}>
           <ArrowBackIosNewIcon></ArrowBackIosNewIcon>
         </IconButton>

@@ -14,7 +14,7 @@ function layout({ children }) {
 
   const Router = useRouter();
   const handleChange = (event, newValue) => {
-    Router.replace(`/orders/${newValue}`);
+    Router.push(`/orders/${newValue}`);
   };
   return (
     <>

@@ -24,6 +24,7 @@ import Image from "next/image";
 import Logo from "@/assets/logo ppcy.svg";
 import Navlink from "./Navlink";
 import Navlink2 from "./Navlink2";
+import { useRouter } from "next/navigation";
 
 const drawerWidth = 240;
 
@@ -64,12 +65,20 @@ ElevationScroll.propTypes = {
 };
 
 export default function DrawerAppBar(props) {
-  const {isLoggedIn, Logout, getMe, token } = useStoreContext();
+  const { isLoggedIn, Logout, getMe, token } = useStoreContext();
   const [name, setName] = useState("");
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const { window } = props;
 
+  useEffect(() => {
+    const nameStored = localStorage.getItem("name");
+    if (nameStored) {
+      setName(nameStored);
+    }
+  }, []);
+  console.log(name);
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const Router = useRouter();
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -82,30 +91,19 @@ export default function DrawerAppBar(props) {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
-  useEffect(() => {
-    const getMeData = async () => {
-      const res = await getMe();
-      if (res?.data) {
-        setName(res?.data?.name);
-      }
-    };
-    if(isLoggedIn){
-      getMeData();
-    }
-    
-  }, [isLoggedIn]);
 
   const drawer = (
     <div className="flex flex-col justify-between h-full">
       <Box onClick={handleDrawerToggle} className="flex flex-col">
         {NAV_ITEMS?.map((item, index) => {
-          if (
-            item?.isLoggedIn == (isLoggedIn) ||
-            item?.isLoggedIn === "both"
-          ) {
+          if (item?.isLoggedIn == isLoggedIn || item?.isLoggedIn === "both") {
             return (
               <Navlink key={index} href={item?.link}>
-                <Button sx={{"&:hover":{backgroundColor:"transparent"}}} disableRipple className="block text-black py-4 ">
+                <Button
+                  sx={{ "&:hover": { backgroundColor: "transparent" } }}
+                  disableRipple
+                  className="block text-black py-4 "
+                >
                   {item.text}
                 </Button>
               </Navlink>
@@ -124,7 +122,7 @@ export default function DrawerAppBar(props) {
               >
                 <Button
                   disableRipple
-                  sx={{"&:hover":{backgroundColor:"transparent"}}}
+                  sx={{ "&:hover": { backgroundColor: "transparent" } }}
                   className="block text-black p-4"
                   onClick={item?.text === "Logout" ? () => Logout() : null}
                 >
@@ -153,7 +151,7 @@ export default function DrawerAppBar(props) {
     <Box className="flex mb-16">
       {/* <CssBaseline /> */}
       <HideOnScroll {...props}>
-        <AppBar component="nav" className="py-2 bg-gray-200" elevation={0}>
+        <AppBar component="nav" className="py-2 bg-gray-100" elevation={0}>
           <Toolbar
             sx={{
               display: "flex",
@@ -170,6 +168,7 @@ export default function DrawerAppBar(props) {
               <MenuIcon />
             </IconButton>
             <Image
+              onClick={() => Router.push("/")}
               src={Logo}
               component="div"
               className="w-[15rem]"
@@ -184,14 +183,14 @@ export default function DrawerAppBar(props) {
             >
               {NAV_ITEMS?.map((item, index) => {
                 if (
-                  item?.isLoggedIn == (isLoggedIn) ||
+                  item?.isLoggedIn == isLoggedIn ||
                   item?.isLoggedIn === "both"
                 ) {
                   return (
                     <Navlink2 key={index} href={item?.link} className="h-full">
                       {/* <Button sx={{ color: "black" }}></Button> */}
 
-                     <p className="font-medium text-lg"> {item?.text}</p>
+                      <p className="font-medium text-lg"> {item?.text}</p>
                     </Navlink2>
                   );
                 }
@@ -221,6 +220,12 @@ export default function DrawerAppBar(props) {
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
                   >
+                    <div className="text-secondary px-4 py-2">
+                      <Typography textlign="center" className="font-bold">
+                        Hi {name?.split(" ")[0]}
+                      </Typography>
+                    </div>
+
                     {PROFILE_ITEMS?.map((item, index) => (
                       <Link
                         href={item.link}
