@@ -88,14 +88,14 @@ function PhoneNumber() {
   };
 
   return (
-    <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-12 items-center">
+    <div className="py-16 flex flex-col lg:flex-row gap-12 items-center">
       <div className="hidden lg:flex flex-col lg:w-3/5 gap-4 ">
         <Image src={text} alt="image.svg"></Image>
         <Image src={Login} alt="image.svg"></Image>
       </div>
 
-      <div className="lg:w-2/5 bg-gray-100 p-4 rounded-lg border">
-        <div className="mx-auto max-w-lg text-center flex flex-col gap-4">
+      <div className="lg:w-2/5 bg-gray-100 p-8 rounded-lg border max-w-md">
+        <div className="text-center flex flex-col gap-4">
           <h1 className="text-2xl font-bold sm:text-3xl">
             Schedule Your Pickup
           </h1>
@@ -106,7 +106,7 @@ function PhoneNumber() {
 
         <form
           onSubmit={handleSubmit}
-          className="mx-auto mb-0 mt-8 max-w-md space-y-4"
+          className="mb-0 mt-8 space-y-4"
         >
           <div>
             <label htmlFor="email" className="sr-only">
