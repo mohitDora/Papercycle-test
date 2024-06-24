@@ -41,7 +41,6 @@ function recycle() {
     handleSnackbarOpen,
     isLoading,
     userAddresses,
-    setUserAddresses,
   } = useStoreContext();
   const [value, setValue] = React.useState(dayjs(new Date()));
   const [time1, setTime1] = React.useState(dayjs().hour(9).minute(0).second(0));
@@ -58,16 +57,14 @@ function recycle() {
   const handleChange = (event) => {
     setAddress(event.target.value);
   };
-  const getMeData=async()=>{
-    await getMe()
-  }
+
   useEffect(() => {
     const loggedIn = Cookies.get("token");
     if (!loggedIn) {
       Router.push("/auth/phonenumber");
       return;
     }
-    getMeData();
+
     setIsLoggedIn(true);
   }, []);
   console.log(userAddresses);
@@ -126,7 +123,7 @@ function recycle() {
         <form className="mx-auto mb-0 mt-8 max-w-md space-y-4">
           <InputLabel id="demo-single-checkbox-label">Address</InputLabel>
           <Select
-          className="bg-white"
+            className="bg-white"
             labelId="demo-single-checkbox-label"
             id="demo-single-checkbox"
             fullWidth
@@ -165,7 +162,7 @@ function recycle() {
               <DemoContainer components={["DatePicker", "MobileTimePicker"]}>
                 <div className="flex flex-col gap-4">
                   <DatePicker
-                  sx={{backgroundColor:"white"}}
+                    sx={{ backgroundColor: "white" }}
                     label="Date"
                     format="DD/MM/YYYY"
                     value={value}
@@ -173,14 +170,14 @@ function recycle() {
                   />
                   <div className="flex gap-4">
                     <MobileTimePicker
-                    sx={{backgroundColor:"white"}}
+                      sx={{ backgroundColor: "white" }}
                       label="Timeslot from"
                       value={time1}
                       required
                       onChange={(newValue) => setTime1(newValue)}
                     />
                     <MobileTimePicker
-                    sx={{backgroundColor:"white"}}
+                      sx={{ backgroundColor: "white" }}
                       label="Timeslot to"
                       value={time2}
                       onChange={(newValue) => setTime2(newValue)}
