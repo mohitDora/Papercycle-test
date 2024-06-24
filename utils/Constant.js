@@ -20,7 +20,7 @@ const style2={
 }
 
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-export const GOOGLE_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
+export const GOOGLE_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API;
 export const PLACE_ID = process.env.NEXT_PUBLIC_PLACE_ID;
 
 export const NAV_ITEMS=[
