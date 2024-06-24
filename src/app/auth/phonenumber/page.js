@@ -1,12 +1,13 @@
 "use client"
 import { Button, Input, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useStoreContext } from "@/Context/store";
 import { CONTACT_DETAILS, MESSAGE } from "../../../../utils/Constant";
 import Image from "next/image";
 import Login from "@/assets/Login.svg";
 import text from "@/assets/text.svg";
 import dustbin from "@/assets/dustbin.svg";
+import { useRouter } from "next/navigation";
 
 function PhoneNumber() {
   const {
@@ -16,6 +17,10 @@ function PhoneNumber() {
     handleSnackbarOpen,
     setIsLoggedIn,sendOTP
   } = useStoreContext();
+
+  const inputRef = useRef(null);
+
+  const Router=useRouter()
 
   const handleChange = (event) => {
     const { value } = event.target;
@@ -36,10 +41,24 @@ function PhoneNumber() {
 setIsLoggedIn(false)
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key >= '0' && event.key <= '9') {
+        inputRef.current.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   const sendOTPFunc = async () => {
     try {
       await sendOTP(phoneNumber);
-
+      Router.push("/auth/verify");
       handleSnackbarOpen();
     } catch (error) {
 
@@ -91,6 +110,7 @@ setIsLoggedIn(false)
                 onChange={handleChange}
                 variant="outlined"
                 required
+                inputRef={inputRef}
                 inputProps={{
                   pattern: "[0-9]{10}",
                   maxLength: 10,

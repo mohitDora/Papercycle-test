@@ -89,9 +89,9 @@ export default function DrawerAppBar(props) {
       }
     };
     if(isLoggedIn){
-      
+      getMeData();
     }
-    getMeData();
+    
   }, [isLoggedIn]);
 
   const drawer = (
@@ -119,7 +119,7 @@ export default function DrawerAppBar(props) {
               <Navlink
                 key={index}
                 href={item?.link}
-                className="hover:bg-gray-100 p-2"
+                className="hover:bg-gray-200 p-2"
               >
                 <Button
                   disableRipple
@@ -152,7 +152,7 @@ export default function DrawerAppBar(props) {
     <Box className="flex mb-16">
       {/* <CssBaseline /> */}
       <HideOnScroll {...props}>
-        <AppBar component="nav" className="py-2 bg-gray-100" elevation={0}>
+        <AppBar component="nav" className="py-2 bg-gray-200" elevation={0}>
           <Toolbar
             sx={{
               display: "flex",

@@ -13,13 +13,14 @@ import FormDialog from "../@Sections/Dialog";
 
 function profile() {
   const [userData, setUserData] = useState({});
-  const { getMe,userAddresses } = useStoreContext();
+  const { getMe,userAddresses,setUserAddresses } = useStoreContext();
 
   useEffect(() => {
     const getMeData = async () => {
       const res = await getMe();
       if(res?.data){
         setUserData(res?.data);
+        setUserAddresses(res?.data?.savedAddresses)
       }
       
     };
@@ -35,7 +36,7 @@ function profile() {
       :
       <div className="flex flex-col gap-4">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 ">
-          <article className="flex items-center gap-4 rounded-lg border bg-gray-100 p-6">
+          <article className="flex items-center gap-4 rounded-lg border bg-gray-200 p-6">
             <div>
               <ScaleIcon className="text-secondary"></ScaleIcon>
               <p className="text-2xl font-medium text-gray-900">$240.94</p>
@@ -45,7 +46,7 @@ function profile() {
               </p>
             </div>
           </article>
-          <article className="flex items-center gap-4 rounded-lg border bg-gray-100 p-6">
+          <article className="flex items-center gap-4 rounded-lg border bg-gray-200 p-6">
             <div>
               <OpacityIcon className="text-secondary"></OpacityIcon>
               <p className="text-2xl font-medium text-gray-900">$240.94</p>
@@ -53,7 +54,7 @@ function profile() {
               <p className="text-sm text-gray-500">Total trees saved</p>
             </div>
           </article>
-          <article className="flex items-center gap-4 rounded-lg border bg-gray-100 p-6">
+          <article className="flex items-center gap-4 rounded-lg border bg-gray-200 p-6">
             <div>
               <ForestIcon className="text-secondary"></ForestIcon>
               <p className="text-2xl font-medium text-gray-900">$240.94</p>
@@ -66,7 +67,7 @@ function profile() {
         </div>
 
         <div className="flex flex-col md:flex-row gap-4">
-          <article className="md:w-2/4 relative flex iems-center gap-4 rounded-lg  bg-hite p-6 flex-col bg-gray-100">
+          <article className="md:w-2/4 relative flex iems-center gap-4 rounded-lg  bg-hite p-6 flex-col bg-gray-200">
             <Tooltip title="Edit">
               <IconButton className="absolute right-6">
                 <EditIcon className="text-secondary"></EditIcon>
@@ -95,9 +96,9 @@ function profile() {
             </div>
           </article>
 
-          <article className="md:w-2/4 rounded-lg border bg-gray-100 b p-6">
+          <article className="md:w-2/4 rounded-lg border bg-gray-200 b p-6">
             <p>Address</p>
-            {removeDuplicate(userAddresses,"addressLine").length == 0 ? (
+            {removeDuplicate(userAddresses,"addressLine").length==0? (
               <p className="p-4 ">No Address Found</p>
             ) : (
               removeDuplicate(userAddresses,"addressLine")?.map((item, index) => {

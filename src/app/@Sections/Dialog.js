@@ -12,7 +12,7 @@ import Map from "../@components/ui/Map";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 
 export default function FormDialog() {
-  const { handleSnackbarOpen, addAddress, setSonner,getMe } = useStoreContext();
+  const { handleSnackbarOpen, addAddress, setSonner } = useStoreContext();
   const [open, setOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState("home");
 

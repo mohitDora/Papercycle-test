@@ -28,7 +28,6 @@ const Layout = ({ children }) => {
     <StoreProvider>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
-          {/* <CssBaseline></CssBaseline> */}
           <LayoutContent>{children}</LayoutContent>
         </ThemeProvider>
       </StyledEngineProvider>

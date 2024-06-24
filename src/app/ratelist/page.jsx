@@ -54,7 +54,7 @@ function page() {
   useEffect(() => {
     getData();
   }, [city]);
-
+console.log(data)
   useEffect(() => {
     setFilteredData(
       data?.filter((item) => {
@@ -122,11 +122,14 @@ function page() {
             onTabChange={handleTabChange}
             tabs={data}
           />
+          <div className="flex flex-col gap-4">
           {!showCategories.length == 0 ? (
             showCategories
           ) : (
             <p>No such Items Available</p>
           )}
+          </div>
+          
         </>
       )}
     </>

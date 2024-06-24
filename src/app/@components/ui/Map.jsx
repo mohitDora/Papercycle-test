@@ -115,7 +115,7 @@ function Map({marker,setMarker,setAddress,setPostcode}) {
         onLoad={(ref) => (autocompleteRef.current = ref)}
         onPlaceChanged={onPlaceChanged}
       >
-        <input type="text" placeholder="Search for a location"/>
+        <TextField fullWidth type="text" placeholder="Search for a location" className="mb-4"/>
       </Autocomplete>
       <GoogleMap
         mapContainerStyle={containerStyle}

@@ -3,8 +3,6 @@ import React from 'react';
 
 function Heading({ title }) {
   const highlightWord = 'papercycle.in';
-
-  // Split the title by spaces to handle words individually
   const words = title.split(' ');
 
   return (
@@ -16,7 +14,7 @@ function Heading({ title }) {
           className={word.toLowerCase() === highlightWord.toLowerCase() ? 'text-secondary' : 'text-black'}
         >
           {word}
-          {index < words.length - 1 && ' '} {/* Add space between words */}
+          {index < words.length - 1 && ' '}
         </span>
       ))}
     </Box>

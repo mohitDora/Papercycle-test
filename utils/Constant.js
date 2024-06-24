@@ -15,7 +15,8 @@ const style={
 }
 const style2={
     fontSize:"3rem",
-    color:"#1e1e1e"
+    // color:"#1e1e1e"
+    color:"white"
 }
 
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;

@@ -18,14 +18,17 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <Head>
-          {/* <link rel="shortcut icon" href={favicon} /> */}
           <link rel="shortcut icon" type="image/png" href="./icon.png" />
         </Head>
-      <body className={inter.className}>
+      <body>
         <Layout>
+          
           <Navbar />
+
           <div className="px-12 md:max-w-screen-xl m-auto">{children}</div>
           <Footer />
+        
+         
         </Layout>
       </body>
     </html>

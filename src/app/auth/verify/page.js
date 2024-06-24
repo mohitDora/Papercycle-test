@@ -26,6 +26,12 @@ function OTP({ separator, length, value, onChange }) {
   };
 
   const handleKeyDown = (event, currentIndex) => {
+    console.log(currentIndex);
+    // if (event.key >= '0' && event.key <= '9') {
+    //   event.preventDefault(); // Prevent default behavior (e.g., typing into the input field)
+    //   focusInput(1); // Focus the current input field
+    //   selectInput(1);
+    // }
     switch (event.key) {
       case "ArrowUp":
       case "ArrowDown":
@@ -39,6 +45,7 @@ function OTP({ separator, length, value, onChange }) {
           selectInput(currentIndex - 1);
         }
         break;
+
       case "ArrowRight":
         event.preventDefault();
         if (currentIndex < length - 1) {
@@ -173,14 +180,21 @@ OTP.propTypes = {
 };
 
 export default function OTPInput() {
-  const { verifyOTP, isLoading, handleSnackbarOpen, sendOTP, phoneNumber } =
-    useStoreContext();
+  const {
+    verifyOTP,
+    isLoading,
+    handleSnackbarOpen,
+    sendOTP,
+    phoneNumber,
+    setSonner,
+  } = useStoreContext();
 
   const [otp, setOtp] = useState("");
+
   const initialTime =
     typeof window !== "undefined"
       ? parseInt(localStorage.getItem("countdownTime")) || 60
-      : 10;
+      : 60;
   const [timeLeft, setTimeLeft] = useState(initialTime);
   useEffect(() => {
     let timer;
@@ -210,6 +224,11 @@ export default function OTPInput() {
 
   const buttonClick = () => {
     if (otp.length !== 6) {
+      setSonner({
+        severity: "error",
+        message: "Please Fill The OTP",
+      });
+      handleSnackbarOpen();
       return;
     }
     verifyOTPFunc();
@@ -221,23 +240,51 @@ export default function OTPInput() {
     localStorage.setItem("countdownTime", 60);
     setTimeLeft(60);
   };
-  useEffect(()=>{
-    localStorage.setItem("countdownTime", 60);
-    setTimeLeft(60);
-  },[])
 
+  // useEffect(() => {
+  //   const handleKeyPress = (event) => {
+  //     if (event.keyCode === 13) {
+  //       if (otp.length !== 6) {
+  //         setSonner({
+  //           severity: "error",
+  //           message: "Please Fill The OTP",
+  //         });
+  //         handleSnackbarOpen();
+  //         return;
+  //       }
+  //       verifyOTPFunc();
+  //     }
+  //   };
+
+  //   document.addEventListener("keydown", handleKeyPress);
+
+  //   return () => {
+  //     document.removeEventListener("keydown", handleKeyPress);
+  //   };
+  // }, []);
+
+  const [storedValue, setStoredValue] = useState("");
+
+  useEffect(() => {
+    // Check if window is defined to prevent issues during SSR
+    if (typeof window !== "undefined") {
+      const valueFromLocalStorage = localStorage.getItem("countdownTime");
+      if (valueFromLocalStorage) {
+        setStoredValue(valueFromLocalStorage);
+      }
+    }
+  });
+  console.log(storedValue);
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-12">
-     
-
       <div className="hidden lg:flex flex-col lg:w-2/3 gap-4 ">
         <Image src={text} alt="image.svg"></Image>
         <Image src={Login} alt="image.svg"></Image>
       </div>
       <div className="lg:w-1/3">
-      <IconButton onClick={() => Router.back()}>
-        <ArrowBackIosNewIcon></ArrowBackIosNewIcon>
-      </IconButton>
+        <IconButton onClick={() => Router.back()}>
+          <ArrowBackIosNewIcon></ArrowBackIosNewIcon>
+        </IconButton>
         <div className="mx-auto max-w-lg text-center flex flex-col gap-4 items-center">
           <h1 className="text-2xl font-bold sm:text-3xl">Enter The OTP</h1>
 
@@ -247,6 +294,8 @@ export default function OTPInput() {
           </p>
           <Image src={dustbin} alt="image.svg"></Image>
           <Box
+            component="form"
+            onSubmit={handleButtonClick}
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -274,8 +323,8 @@ export default function OTPInput() {
             </Button>
             <div>
               <div className="flex items-center">
-                <p>{`Resend OTP in ${timeLeft} seconds`}</p>
-                {/* <Timer timeLeft={timeLeft} /> */}
+                <p>{`Resend OTP in ${storedValue} seconds`}</p>
+
                 <Button onClick={handleButtonClick} disabled={timeLeft}>
                   Resend OTP
                 </Button>

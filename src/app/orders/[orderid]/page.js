@@ -56,7 +56,7 @@ export default function BasicTable() {
       </div>
       
       <div className="flex flex-col lg:flex-row-reverse gap-12">
-        <article className="lg:w-2/5 relative flex iems-center gap-4 rounded-lg border bg-gray-100 bg-hite p-6 flex-col">
+        <article className="lg:w-2/5 relative flex iems-center gap-4 rounded-lg border bg-gray-200 bg-hite p-6 flex-col">
           <div>
             <p className="text-sm text-gray-500">Order Date</p>
             <p className="text-2xl font-medium text-gray-900">

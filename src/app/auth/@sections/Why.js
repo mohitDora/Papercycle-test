@@ -8,7 +8,7 @@ function Why() {
   return (
     <>
       <Heading title="Why papercycle.in ?"></Heading>
-      <div className="flex flex-col md:grid grid-cols-2 w-[100%] gap-4">
+      <div className="flex flex-col lg:grid grid-cols-2 w-[100%] gap-4">
         {COMPONENTS_DATA2?.map((item, index) => {
           return (
             <Card2 key={index} title={item.title} desc={item.description} image={item.image}/>

@@ -50,7 +50,7 @@ function Testimonial() {
     {
       isLoading?<CircularLoader></CircularLoader>:
     
-    <div className="flex flex-col md:grid grid-cols-2 w-[100%] gap-4">
+    <div className="flex flex-col lg:grid grid-cols-2 w-[100%] gap-4">
       {
         reviews?.length==0?<p>Error Fetching Testimonials</p>:reviews?.map((item,index)=>{
           return(

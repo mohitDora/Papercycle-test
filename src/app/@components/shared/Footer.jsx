@@ -11,12 +11,12 @@ import { Typography } from "@mui/material";
 import Link from "next/link";
 import { useStoreContext } from "@/Context/store";
 import Image from "next/image";
-import Logo from "@/assets/logo ppcy.svg";
+import Logo from "@/assets/logo-bw.svg";
 
 function Footer() {
   const { Logout,token,isLoggedIn } = useStoreContext();
   return (
-    <footer className="bg-gray-100 mt-12">
+    <footer className=" mt-12" style={{backgroundColor:"#313131",color:"white"}}>
       <div className="px-12 md:max-w-screen-xl m-auto flex flex-col md:flex-row justify-between  gap-12 py-16">
         <div className="flex flex-col">
           <div>
@@ -46,13 +46,13 @@ function Footer() {
         <div className="flex flex-col md:flex-row gap-12">
           <div className="max-w-sm flex gap-4 flex-col">
             <div>
-              <p className="font-medium text-gray-900">Address</p>
+              <p className="font-medium text-gay-900 text-white">Address</p>
               <div className="mt-4 space-y-4 text-sm">
                 <Typography>{Address}</Typography>
               </div>
             </div>
             <div>
-              <p className="font-medium text-gray-900">Contact Us</p>
+              <p className="font-medium text-gry-900 text-white">Contact Us</p>
               <div className="mt-4 text-sm">
                 {CONTACT_DETAILS.map((item, index) => {
                   return <Typography key={index}>{item.value}</Typography>;
@@ -62,7 +62,7 @@ function Footer() {
           </div>
 
           <div>
-            <p className="font-medium text-gray-900">Links</p>
+            <p className="font-medium text-gra-900 text-white">Links</p>
 
             <div className="mt-4 space-y-2 text-sm">
               {NAV_ITEMS?.map((item, index) => {
@@ -89,11 +89,11 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="bg-secondary px-4 py-3 text-whte">
+      {/* <div className="bg-secondary px-4 py-3 text-whte">
         <p className="text-cnter text-sm font-medium">
           &copy; 2024. PaperCycle. All rights reserved.
         </p>
-      </div>
+      </div> */}
     </footer>
   );
 }
