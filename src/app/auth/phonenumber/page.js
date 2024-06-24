@@ -67,7 +67,11 @@ function PhoneNumber() {
 
   const sendOTPFunc = async () => {
     try {
-      await sendOTP(phoneNumber);
+      const res=await sendOTP(phoneNumber);
+      console.log(res)
+      if(!(res.success)){
+        return
+      }
       Router.push("/auth/verify");
       handleSnackbarOpen();
     } catch (error) {
