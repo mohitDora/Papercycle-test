@@ -23,6 +23,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "@/assets/logo ppcy.svg";
 import Navlink from "./Navlink";
+import Navlink2 from "./Navlink2";
 
 const drawerWidth = 240;
 
@@ -187,9 +188,11 @@ export default function DrawerAppBar(props) {
                   item?.isLoggedIn === "both"
                 ) {
                   return (
-                    <Navlink key={index} href={item?.link} className="h-full">
-                      <Button sx={{ color: "black" }}>{item?.text}</Button>
-                    </Navlink>
+                    <Navlink2 key={index} href={item?.link} className="h-full">
+                      {/* <Button sx={{ color: "black" }}></Button> */}
+
+                     <p className="font-medium text-lg"> {item?.text}</p>
+                    </Navlink2>
                   );
                 }
               })}
