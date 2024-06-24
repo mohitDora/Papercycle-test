@@ -67,7 +67,7 @@ function profile() {
         </div>
 
         <div className="flex flex-col md:flex-row gap-4">
-          <article className="md:w-2/4 relative flex iems-center gap-4 rounded-lg  bg-hite p-6 flex-col bg-gray-200">
+          <article className="md:w-2/4 relative flex iems-center gap-4 rounded-lg  bg-hite p-6 flex-col border bg-gray-200">
             <Tooltip title="Edit">
               <IconButton className="absolute right-6">
                 <EditIcon className="text-secondary"></EditIcon>

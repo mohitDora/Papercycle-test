@@ -1,13 +1,10 @@
-import { Inter } from "next/font/google";
 import Navbar from "@/app/@components/shared/Navbar";
 import Footer from "@/app/@components/shared/Footer";
 import Layout from "@/app/@components/shared/Layout";
 import Head from "next/head";
 
 import "./globals.css";
-// import image from "../../lib/assets"
 
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Papercycle.in | Odisha's 1st and leading digital recycling platform.",

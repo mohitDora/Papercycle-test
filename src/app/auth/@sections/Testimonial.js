@@ -1,17 +1,17 @@
 "use client"
 import { GOOGLE_API_KEY, PLACE_ID } from '@/Constant';
 import { useStoreContext } from '@/Context/store';
-import Card from '@/app/@components/ui/Card'
 import Card2 from '@/app/@components/ui/Card2';
 import CircularLoader from '@/app/@components/ui/CircularLoader';
 import Heading from '@/app/@components/ui/Heading'
-import Loading from '@/app/@components/ui/Loading';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 function Testimonial() {
   const [reviews, setReviews] = useState([]);
   const [isLoading,setIsLoading]=useState(false)
   const {setSonner,handleSnackbarOpen}=useStoreContext()
+  const Router=useRouter()
 
   const handleFetchReviews = async () => {
     setIsLoading(true)
@@ -21,8 +21,9 @@ function Testimonial() {
       if (!response.ok) {
         setSonner({
           severity: "error",
-          message: "Server Error",
+          message: "Server Error Please Refresh The Page",
         });
+        // Router.refresh()
         handleSnackbarOpen();
       }
   

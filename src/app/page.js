@@ -18,6 +18,8 @@ import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 import FormDialog from "./@Sections/Dialog";
 import { removeDuplicate } from "@/RemoveDuplicate";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -40,9 +42,19 @@ function recycle() {
   const [address, setAddress] = useState('');
   const [addressId,setAddressID]=useState('')
 
+const Router=useRouter()
+
   const handleChange = (event) => {
     setAddress(event.target.value);
   };
+
+  useEffect(() => {
+    const loggedIn = Cookies.get("token");
+    if (!loggedIn) {
+      Router.replace("/auth/phonenumber");
+    }
+  },[]);
+
   useEffect(() => {
     setIsLoggedIn(true);
     const getMeData = async () => {

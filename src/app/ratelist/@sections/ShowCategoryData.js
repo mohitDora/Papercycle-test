@@ -17,7 +17,7 @@ function ShowCategoryData({ prices, category }) {
             {prices?.map((item, index) => {
               return (
                 <Chip
-                  className="p-8 bg-gray-200"
+                  className="p-8 bg-gray-200 border"
                   label={
                     <>
                       <p className="font-bold text-lg">{item?.item}</p>

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Button, Input, TextField } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { useStoreContext } from "@/Context/store";
@@ -8,6 +8,7 @@ import Login from "@/assets/Login.svg";
 import text from "@/assets/text.svg";
 import dustbin from "@/assets/dustbin.svg";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 function PhoneNumber() {
   const {
@@ -15,53 +16,61 @@ function PhoneNumber() {
     setPhoneNumber,
     isLoading,
     handleSnackbarOpen,
-    setIsLoggedIn,sendOTP
+    setIsLoggedIn,
+    sendOTP,
   } = useStoreContext();
 
-  const inputRef = useRef(null);
+  const Router = useRouter();
 
-  const Router=useRouter()
+  useEffect(() => {
+    const loggedIn = Cookies.get("token");
+    if (loggedIn) {
+      Router.replace("/");
+    }
+  },[]);
+
+  const inputRef = useRef(null);
 
   const handleChange = (event) => {
     const { value } = event.target;
     const formattedValue = value.replace(/[^\d]/g, "");
     setPhoneNumber(formattedValue);
-    if(typeof window !== "undefined"){
-    localStorage.setItem('phoneNumber', formattedValue);
-    console.log(phoneNumber);}
+    if (typeof window !== "undefined") {
+      localStorage.setItem("phoneNumber", formattedValue);
+      console.log(phoneNumber);
+    }
   };
 
   useEffect(() => {
-    if(typeof window !== "undefined"){
-      const storedPhoneNumber = localStorage.getItem('phoneNumber');
+    if (typeof window !== "undefined") {
+      const storedPhoneNumber = localStorage.getItem("phoneNumber");
       if (storedPhoneNumber) {
         setPhoneNumber(storedPhoneNumber);
       }
     }
-setIsLoggedIn(false)
+    setIsLoggedIn(false);
   }, []);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.key >= '0' && event.key <= '9') {
+      if (event.key >= "0" && event.key <= "9") {
         inputRef.current.focus();
       }
     };
 
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
   const sendOTPFunc = async () => {
     try {
       await sendOTP(phoneNumber);
-      Router.push("/auth/verify");
+      Router.replace("/auth/verify");
       handleSnackbarOpen();
     } catch (error) {
-
       handleSnackbarOpen();
       console.log(error);
     }
@@ -77,20 +86,17 @@ setIsLoggedIn(false)
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-12">
       <div className="hidden lg:flex flex-col lg:w-2/3 gap-4 ">
-      <Image src={text} alt="image.svg"></Image>
-      <Image src={Login} alt="image.svg"></Image>
+        <Image src={text} alt="image.svg"></Image>
+        <Image src={Login} alt="image.svg"></Image>
       </div>
-      
+
       <div className="lg:w-1/3">
-    
         <div className="mx-auto max-w-lg text-center flex flex-col items-center gap-4">
           <h1 className="text-2xl font-bold sm:text-3xl">
             Schedule Your Pickup
           </h1>
-          
-          <p className=" text-gray-500">
-            {MESSAGE}
-          </p>
+
+          <p className=" text-gray-500">{MESSAGE}</p>
           <Image src={dustbin} alt="image.svg"></Image>
         </div>
 
