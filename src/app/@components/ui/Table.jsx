@@ -105,7 +105,7 @@ export default function CustomPaginationActionsTable({
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows?.length) : 0;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -150,9 +150,9 @@ export default function CustomPaginationActionsTable({
         </TableHead>
         <TableBody>
           {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            ? rows?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
-          ).map((row, index) => {
+          )?.map((row, index) => {
             return (
               <TableRow
                 onClick={() => Router.push(`/orders/${row?.id}`)}
@@ -191,7 +191,7 @@ export default function CustomPaginationActionsTable({
           <TableRow>
             <TablePagination
               rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-              count={rows.length}
+              count={rows?.length}
               rowsPerPage={rowsPerPage}
               page={page}
               slotProps={{
