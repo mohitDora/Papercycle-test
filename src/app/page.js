@@ -66,17 +66,17 @@ function recycle() {
       return;
     }
    
-    const getMeData = async () => {
-      const res = await getMe();
-      if (res?.data) {
-        console.log(res?.data);
-        setUserAddresses(res?.data?.savedAddresses);
-        if (typeof window !== "undefined") {
-          localStorage.setItem("name", res?.data?.name);
-        }
-      }
-    };
-    getMeData();
+    // const getMeData = async () => {
+    //   const res = await getMe();
+    //   if (res?.data) {
+    //     console.log(res?.data);
+    //     setUserAddresses(res?.data?.savedAddresses);
+    //     if (typeof window !== "undefined") {
+    //       localStorage.setItem("name", res?.data?.name);
+    //     }
+    //   }
+    // };
+    // getMeData();
     setIsLoggedIn(true);
   }, []);
   console.log(userAddresses);

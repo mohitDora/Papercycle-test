@@ -12,18 +12,14 @@ import CircularLoader from "../@components/ui/CircularLoader";
 import FormDialog from "../@Sections/Dialog";
 
 function profile() {
-  const [userData, setUserData] = useState({});
-  const { getMe,userAddresses,setUserAddresses } = useStoreContext();
+
+  const { getMe,userAddresses,setUserAddresses,userData, setUserData } = useStoreContext();
+
+const getMeData=async()=>{
+  await getMe()
+}
 
   useEffect(() => {
-    const getMeData = async () => {
-      const res = await getMe();
-      if(res?.data){
-        setUserData(res?.data);
-        setUserAddresses(res?.data?.savedAddresses)
-      }
-      
-    };
     getMeData();
   }, []);
 
