@@ -58,25 +58,16 @@ function recycle() {
   const handleChange = (event) => {
     setAddress(event.target.value);
   };
-
+  const getMeData=async()=>{
+    await getMe()
+  }
   useEffect(() => {
     const loggedIn = Cookies.get("token");
     if (!loggedIn) {
       Router.push("/auth/phonenumber");
       return;
     }
-   
-    // const getMeData = async () => {
-    //   const res = await getMe();
-    //   if (res?.data) {
-    //     console.log(res?.data);
-    //     setUserAddresses(res?.data?.savedAddresses);
-    //     if (typeof window !== "undefined") {
-    //       localStorage.setItem("name", res?.data?.name);
-    //     }
-    //   }
-    // };
-    // getMeData();
+    getMeData();
     setIsLoggedIn(true);
   }, []);
   console.log(userAddresses);
