@@ -20,7 +20,7 @@ const getMeData=async()=>{
 }
 
   useEffect(() => {
-    // getMeData();
+    getMeData();
   }, []);
 
   console.log(userData);
