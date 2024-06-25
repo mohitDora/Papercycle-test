@@ -24,7 +24,7 @@ export const GOOGLE_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API;
 export const PLACE_ID = process.env.NEXT_PUBLIC_PLACE_ID;
 
 export const NAV_ITEMS=[
-    {text:"Home",link:"/auth/phonenumber",isLoggedIn:false},
+    {text:"Home",link:"/letsrecycle",isLoggedIn:false},
     {text: "Recycle",link:"/",isLoggedIn:true},
     { text: "RateList", link: "/ratelist",isLoggedIn:"both" },
     { text: "About", link: "/about",isLoggedIn:"both" },
@@ -45,7 +45,7 @@ export const PROFILE_ITEMS = [
   },
   {
     text: "Logout",
-    link: "/auth/phonenumber",
+    link: "/letsrecycle",
   },
 ];
 

@@ -42,7 +42,7 @@ function page() {
       }
 
       const result = await res.json();
-
+console.log("result",result)
       setData(result?.data?.categories);
       setFilteredData(result?.data?.categories);
     } catch (error) {

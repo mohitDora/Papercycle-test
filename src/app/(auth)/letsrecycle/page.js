@@ -69,11 +69,12 @@ function PhoneNumber() {
     try {
       const res=await sendOTP(phoneNumber);
       console.log(res)
-      if(!(res.success)){
+      handleSnackbarOpen();
+      if(!(res?.success)){
         return
       }
-      Router.push("/auth/verify");
-      handleSnackbarOpen();
+      Router.push("/verifyotp");
+     
     } catch (error) {
       handleSnackbarOpen();
       console.log(error);
@@ -94,7 +95,7 @@ function PhoneNumber() {
         <Image src={Login} alt="image.svg"></Image>
       </div>
 
-      <div className="w-[100%] lg:w-2/5 bg-gray-100 p-8 rounded-lg border max-w-md m-auto">
+      <div className="w-[100%] lg:w-2/5 bg-gray-100 p-8 rounded-lg border max-w-md m-auto shadow-md">
         <div className="text-center flex flex-col gap-4">
           <h1 className="text-2xl font-bold sm:text-3xl">
             Enter Mobile Number

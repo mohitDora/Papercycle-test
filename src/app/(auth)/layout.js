@@ -4,8 +4,8 @@ import Why from "./@sections/Why";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 export const metadata = {
-    title: "Authentication",
-  };
+  title: "Papercycle.in | Odisha's 1st and leading digital recycling platform.",
+};
 export default function layout({ children }) {
   return (
     <>

@@ -17,6 +17,7 @@
     "@react-google-maps/api": "^2.19.3",
     "dayjs": "^1.11.11",
     "js-cookie": "^3.0.5",
+    "keen-slider": "^6.8.6",
     "next": "14.2.4",
     "npm-check-updates": "^16.14.20",
     "react": "^18",

@@ -64,7 +64,7 @@ function recycle() {
   useEffect(() => {
     const loggedIn = Cookies.get("token");
     if (!loggedIn) {
-      Router.push("/auth/phonenumber");
+      Router.push("/letsrecycle");
       return;
     }
     getMeData();
@@ -114,7 +114,7 @@ function recycle() {
         className="hidden lg:block lg:w-3/5"
         alt="recycle_image.svg"
       ></Image>
-      <div className="lg:w-2/5 bg-gray-100 py-4 px-8 rounded-lg border">
+      <div className="w-[100%] lg:w-2/5 bg-gray-100 p-8 rounded-lg border max-w-md m-auto shadow-md">
         <div className="mx-auto max-w-lg text-center">
           <h1 className="text-2xl font-bold sm:text-3xl">
             Schedule Your Pickup

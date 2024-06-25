@@ -281,7 +281,7 @@ export default function OTPInput() {
         <Image src={text} alt="image.svg"></Image>
         <Image src={Login} alt="image.svg"></Image>
       </div>
-      <div className="w-[100%] lg:w-2/5 bg-gray-100 p-8 rounded-lg border max-w-md m-auto">
+      <div className="w-[100%] lg:w-2/5 bg-gray-100 p-8 rounded-lg border max-w-md m-auto shadow-md">
         <IconButton onClick={() => Router.back()}>
           <ArrowBackIosNewIcon></ArrowBackIosNewIcon>
         </IconButton>

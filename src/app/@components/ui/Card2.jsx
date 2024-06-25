@@ -6,7 +6,7 @@ import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 function Card2({ title, desc, image, image2, value, time }) {
   if (image2) {
     return (
-      <article className="flex flex-col gap-4 rounded-lg border bg-gray-100 p-6">
+      <article id="keen-slider" class="keen-slider" className="flex flex-col gap-4 rounded-lg border bg-gray-100 p-6 shadow-sm">
         <div className="flex flex-col">
           <FormatQuoteIcon
             sx={{ fontSize: "5rem" }}
@@ -29,7 +29,7 @@ function Card2({ title, desc, image, image2, value, time }) {
     );
   }
   return (
-    <article className="flex items-center gap-4 rounded-lg border bg-gray-100 p-6">
+    <article className="flex items-center gap-4 rounded-lg border bg-gray-100 p-6 shadow-sm">
       <div>
         {image}
 

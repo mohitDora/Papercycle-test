@@ -151,7 +151,7 @@ export default function DrawerAppBar(props) {
     <Box className="flex mb-16 justify-between">
       {/* <CssBaseline /> */}
       <HideOnScroll {...props}>
-        <AppBar component="nav" className="py-2 bg-gray-100 " elevation={0}>
+        <AppBar component="nav" className="py-2 bg-gray-100 shadow-md" elevation={2} >
           <Toolbar className="w-[100%] flex justify-between md:max-w-screen-xl m-auto">
             <div className="flex">
               <IconButton

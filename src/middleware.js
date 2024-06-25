@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server'
 export function middleware(request) {
   const path = request.nextUrl.pathname
 
-  const isPublicPath = path === '/auth/phonenumber' || path === '/auth/verify' || path === '/auth/register'
+  const isPublicPath = path === '/letsrecycle' || path === '/verifyotp' || path === '/startrecycling'
 
   const token = request.cookies.get('token')?.value || ''
 
@@ -14,7 +14,7 @@ export function middleware(request) {
   }
 
   if (!isPublicPath && !token) {
-    return NextResponse.redirect(new URL('/auth/phonenumber', request.nextUrl))
+    return NextResponse.redirect(new URL('/letsrecycle', request.nextUrl))
   }
     
 }
@@ -25,9 +25,9 @@ export const config = {
   matcher: [
     '/',
     '/profile',
-    '/auth/phonenumber',
-    '/auth/verify',
-    '/auth/register',
+    '/letsrecycle',
+    '/verifyotp',
+    '/startrecycling',
     '/orders/:id*',
     '/helpsupport'
   ]
