@@ -276,16 +276,16 @@ export default function OTPInput() {
   });
   console.log(storedValue);
   return (
-    <div className="py-16 flex flex-col lg:flex-row gap-12 items-center">
+    <div className="py-16 flex flex-col lg:flex-row gap-12">
       <div className="hidden lg:flex flex-col lg:w-3/5 gap-4 ">
         <Image src={text} alt="image.svg"></Image>
         <Image src={Login} alt="image.svg"></Image>
       </div>
-      <div className="lg:w-2/5 bg-gray-100 p-8 rounded-lg border max-w-md">
+      <div className="w-[100%] lg:w-2/5 bg-gray-100 p-8 rounded-lg border max-w-md m-auto">
         <IconButton onClick={() => Router.back()}>
           <ArrowBackIosNewIcon></ArrowBackIosNewIcon>
         </IconButton>
-        <div className=" text-center flex flex-col gap-4 items-center">
+        <div className=" text-center flex flex-col gap-2 items-center">
           <h1 className="text-2xl font-bold sm:text-3xl">Enter The OTP</h1>
 
           <p className=" text-gray-500">
@@ -303,11 +303,8 @@ export default function OTPInput() {
               justifyContent: "center",
             }}
           >
-            <OTP
-              value={otp}
-              onChange={setOtp}
-              length={6}
-            />
+            <OTP value={otp} onChange={setOtp} length={6} />
+
             <Button
               disableElevation
               onClick={buttonClick}

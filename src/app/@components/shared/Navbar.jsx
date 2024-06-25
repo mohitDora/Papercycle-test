@@ -148,36 +148,33 @@ export default function DrawerAppBar(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box className="flex mb-16">
+    <Box className="flex mb-16 justify-between">
       {/* <CssBaseline /> */}
       <HideOnScroll {...props}>
-        <AppBar component="nav" className="py-2 bg-gray-100" elevation={0}>
-          <Toolbar
-            sx={{
-              display: "flex",
-              justifyContent: { sm: "flex-start", md: "space-between" },
-            }}
-          >
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { md: "none" } }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Image
-              onClick={() => Router.push("/")}
-              src={Logo}
-              component="div"
-              className="w-[15rem]"
-              alt="logo.svg"
-            ></Image>
+        <AppBar component="nav" className="py-2 bg-gray-100 " elevation={0}>
+          <Toolbar className="w-[100%] flex justify-between md:max-w-screen-xl m-auto">
+            <div className="flex">
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ m: 1, display: { md: "none" } }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Image
+                onClick={() => Router.push("/")}
+                src={Logo}
+                component="div"
+                className="w-[15rem]"
+                alt="logo.svg"
+              ></Image>
+            </div>
             <Box
               sx={{
                 display: { xs: "none", md: "flex" },
-                gap: "2rem",
+                gap: "5rem",
                 alignItems: "center",
               }}
             >

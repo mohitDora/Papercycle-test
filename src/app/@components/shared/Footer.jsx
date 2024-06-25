@@ -14,17 +14,22 @@ import Image from "next/image";
 import Logo from "@/assets/logo-bw.svg";
 
 function Footer() {
-  const { Logout,token,isLoggedIn } = useStoreContext();
+  const { Logout, token, isLoggedIn } = useStoreContext();
   return (
-    <footer className=" mt-12" style={{backgroundColor:"#313131",color:"white"}}>
+    <footer
+      className=" mt-12"
+      style={{ backgroundColor: "#313131", color: "white" }}
+    >
       <div className="px-12 md:max-w-screen-xl m-auto flex flex-col md:flex-row justify-between  gap-12 py-16">
         <div className="flex flex-col">
           <div>
             <div>
-            <Image src={Logo} component="div" className="w-[20rem]" alt="logo.svg"></Image>
-              {/* <Typography className="text-secondary font-bold" variant="h2">
-                PaperCycle
-              </Typography> */}
+              <Image
+                src={Logo}
+                component="div"
+                className="mb-4"
+                alt="logo.svg"
+              ></Image>
               <div className="flex gap-2 my-2">
                 {SOCIAL_MEDIA.map((item, index) => {
                   return (
@@ -67,7 +72,7 @@ function Footer() {
             <div className="mt-4 space-y-2 text-sm">
               {NAV_ITEMS?.map((item, index) => {
                 if (
-                  item?.isLoggedIn == (isLoggedIn) ||
+                  item?.isLoggedIn == isLoggedIn ||
                   item?.isLoggedIn === "both"
                 ) {
                   return (
@@ -77,11 +82,16 @@ function Footer() {
                   );
                 }
               })}
-              {(isLoggedIn) &&
+              {isLoggedIn &&
                 PROFILE_ITEMS?.map((item, index) => {
                   return (
                     <Typography key={index}>
-                      <Link href={item.link} onClick={item.text==="Logout"?()=>Logout():""}>{item.text}</Link>
+                      <Link
+                        href={item.link}
+                        onClick={item.text === "Logout" ? () => Logout() : ""}
+                      >
+                        {item.text}
+                      </Link>
                     </Typography>
                   );
                 })}
@@ -89,11 +99,6 @@ function Footer() {
           </div>
         </div>
       </div>
-      {/* <div className="bg-secondary px-4 py-3 text-whte">
-        <p className="text-cnter text-sm font-medium">
-          &copy; 2024. PaperCycle. All rights reserved.
-        </p>
-      </div> */}
     </footer>
   );
 }

@@ -14,7 +14,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color:black;
+  background-color:#313131;
   
   border-radius:0.1rem;
 }
@@ -22,7 +22,7 @@
   z-index: 10000;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
   html{
     font-size: 0.8rem;
   }

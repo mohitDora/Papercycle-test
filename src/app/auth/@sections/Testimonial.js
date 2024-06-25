@@ -47,7 +47,7 @@ function Testimonial() {
   console.log("reviews",reviews)
   return (
     <>
-    <Heading title="Testimonial"></Heading>
+    <Heading title="Testimonials"></Heading>
     {
       isLoading?<CircularLoader></CircularLoader>:
     

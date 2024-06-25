@@ -41,17 +41,17 @@ function RegisterPage() {
     registerUserFunc();
   };
   return (
-    <div className="py-16 flex flex-col lg:flex-row gap-12 items-center">
+    <div className="py-16 flex flex-col lg:flex-row gap-12">
       <div className="hidden md:flex flex-col lg:w-3/5 gap-4 ">
       <Image src={text} alt="image.svg"></Image>
       <Image src={Login} alt="image.svg"></Image>
       </div>
-      <div className="lg:w-2/5 bg-gray-100 p-8 rounded-lg border max-w-md">
+      <div className="w-[100%] lg:w-2/5 bg-gray-100 p-8 rounded-lg border max-w-md m-auto">
       <div className="mx-auto max-w-lg text-center">
         <h1 className="text-2xl font-bold sm:text-3xl">You're Almost There!</h1>
 
         <p className="mt-4 text-gray-500">
-          {MESSAGE}
+        Sign up with papercycle.in! Help us make the world greener, one recycle at a time.
         </p>
       </div>
 

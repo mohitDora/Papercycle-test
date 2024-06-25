@@ -13,13 +13,9 @@ function Card2({ title, desc, image, image2, value, time }) {
             className="rotate-180 text-secondary"
           ></FormatQuoteIcon>
           <p className="text-sm text-gray-500">{desc}</p>
-          {/* <FormatQuoteIcon
-            sx={{ fontSize: "5rem" }}
-            className="self-end text-secondary"
-          ></FormatQuoteIcon> */}
         </div>
         <div className="flex gap-4 items-center">
-          <Image src={image2} alt="author.png" width={70} height={70}></Image>
+          <Image src={image2} alt="author.png" width={50} height={50}></Image>
           <div>
             <p className="text-2xl font-medium text-gray-900">{title}</p>
             <div className="flex items-center gap-2 ">
