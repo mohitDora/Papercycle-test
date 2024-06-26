@@ -12,7 +12,7 @@ function ShowCategoryData({ prices, category }) {
           <div className="flex flex-wrap gap-4">
             {prices?.map((item, index) => {
               return (
-                <div key={index} className="px-8 text-enter py-2 rounded bg-gray-100 border shadow-sm">
+                <div key={index} className="px-8 text-enter py-2 rounded bg-gray-100 brder shdow-sm">
                   <>
                     <p className="font-medium text-md">{item?.item}</p>
                     <p className="text-xl font-bold">
